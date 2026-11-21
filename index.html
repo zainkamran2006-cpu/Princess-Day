@@ -1,0 +1,2561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ammara's Kingdom 👑✨</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Cinzel+Decorative:wght@700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --royal-ivory: #fffdf8;
+      --royal-parchment: #fcf5e8;
+      --champagne-gold: #d4a359;
+      --bright-gold: #ffd166;
+      --deep-amethyst: #3b1d54;
+      --royal-plum: #59266e;
+      --soft-lilac: #f3e8ff;
+      --blush-petal: #ffd6e5;
+      --velvet-rose: #c93b64;
+      --caramel-fur: #d3a17e;
+      --outline-brown: #4a2c20;
+      --text-royal: #361938;
+      --text-soft: #643d66;
+      --glass-card: rgba(255, 253, 249, 0.9);
+      --shadow-imperial: 0 18px 46px rgba(59, 29, 84, 0.16);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: linear-gradient(155deg, #f6ebff 0%, #ffe6f0 48%, #fff6e5 100%);
+      color: var(--text-royal);
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      transition: background 1.4s ease, color 0.9s ease;
+      padding-bottom: 44px;
+    }
+
+    /* Distinct Fairytale Atmosphere per Chapter (Royal Lilac, Gold, Velvet & Starlight) */
+    body[data-scene="0"] { background: radial-gradient(circle at top, #fff8eb 0%, #f5e6ff 48%, #ffdce8 100%); }
+    body[data-scene="1"] { background: linear-gradient(160deg, #e8d8ff 0%, #ffdbe9 52%, #fff5e4 100%); }
+    body[data-scene="2"] { background: linear-gradient(160deg, #fff7eb 0%, #f4e4ff 52%, #ffdbe7 100%); }
+    body[data-scene="3"] { background: linear-gradient(160deg, #fdf3e7 0%, #f1e1ff 50%, #ffe2ec 100%); }
+    body[data-scene="4"] { background: linear-gradient(160deg, #2b1742 0%, #4d2463 52%, #7c3868 100%); color: #fff8f2; }
+    body[data-scene="5"] { background: linear-gradient(160deg, #fdf5e6 0%, #f7e6ff 55%, #ffe5ee 100%); }
+    body[data-scene="6"] { background: linear-gradient(160deg, #fff6eb 0%, #f2e2ff 50%, #ffdfe9 100%); }
+    body[data-scene="7"] { background: linear-gradient(160deg, #24143b 0%, #4b235e 52%, #873a68 100%); color: #fff8f2; }
+    body[data-scene="8"] { background: linear-gradient(160deg, #1b1130 0%, #371e52 55%, #662d5c 100%); color: #fff8f2; }
+    body[data-scene="9"] { background: linear-gradient(160deg, #fff9ef 0%, #f4e3ff 50%, #ffe0eb 100%); }
+    body[data-scene="10"] { background: linear-gradient(180deg, #120c24 0%, #2b1847 48%, #592654 100%); color: #fff8f2; }
+
+    /* Ambient Royal Background Orbs & Shooting Stars */
+    .imperial-backdrop {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .royal-aura {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(65px);
+      opacity: 0.48;
+      transition: all 1.2s ease;
+    }
+    .aura-gold { width: 340px; height: 340px; background: #ffd166; top: -40px; left: 6%; opacity: 0.32; }
+    .aura-lilac { width: 380px; height: 380px; background: #d8b4fe; bottom: 5%; right: 4%; }
+    .aura-rose { width: 300px; height: 300px; background: #ff9ebb; top: 42%; left: 10%; opacity: 0.35; }
+
+    .filigree-frame-border {
+      position: fixed;
+      inset: 10px;
+      border: 1.5px solid rgba(212, 163, 89, 0.35);
+      border-radius: 22px;
+      pointer-events: none;
+      z-index: 40;
+    }
+
+    /* Persistent Top Royal Header */
+    .royal-topbar {
+      width: 100%;
+      max-width: 1230px;
+      padding: 30px 24px 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      z-index: 60;
+    }
+
+    .royal-crest-brand { display: flex; flex-direction: column; }
+
+    .crest-title {
+      font-family: 'Cinzel Decorative', 'Playfair Display', serif;
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: var(--royal-plum);
+      letter-spacing: 1px;
+      transition: color 0.8s ease;
+    }
+    body[data-scene="4"] .crest-title,
+    body[data-scene="7"] .crest-title,
+    body[data-scene="8"] .crest-title,
+    body[data-scene="10"] .crest-title { color: var(--bright-gold); }
+
+    .crest-subtitle {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-soft);
+      transition: color 0.8s ease;
+    }
+    body[data-scene="4"] .crest-subtitle,
+    body[data-scene="7"] .crest-subtitle,
+    body[data-scene="8"] .crest-subtitle,
+    body[data-scene="10"] .crest-subtitle { color: #e8d5f5; }
+
+    .topbar-actions { display: flex; align-items: center; gap: 8px; }
+
+    .chapter-pill {
+      background: rgba(255, 253, 248, 0.92);
+      border: 1.5px solid var(--champagne-gold);
+      color: var(--deep-amethyst);
+      padding: 5px 14px;
+      border-radius: 30px;
+      font-size: 0.73rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 14px rgba(59, 29, 84, 0.12);
+    }
+
+    .royal-icon-btn {
+      background: rgba(255, 253, 248, 0.94);
+      border: 2px solid var(--champagne-gold);
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      box-shadow: 0 4px 12px rgba(59, 29, 84, 0.15);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+    .royal-icon-btn:hover { transform: scale(1.08); background: #fff; }
+    .royal-icon-btn.muted { opacity: 0.55; filter: grayscale(0.7); }
+
+    /* Journey Progress Trail */
+    .journey-trail {
+      display: flex;
+      gap: 6px;
+      margin: 2px 0 10px;
+      z-index: 20;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 0 16px;
+    }
+    .trail-gem {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(89, 38, 110, 0.24);
+      transition: all 0.35s ease;
+    }
+    body[data-scene="4"] .trail-gem,
+    body[data-scene="7"] .trail-gem,
+    body[data-scene="8"] .trail-gem,
+    body[data-scene="10"] .trail-gem { background: rgba(255, 255, 255, 0.28); }
+    .trail-gem.done { background: var(--velvet-rose); }
+    .trail-gem.active {
+      width: 24px;
+      border-radius: 10px;
+      background: var(--champagne-gold);
+      box-shadow: 0 0 10px rgba(255, 209, 102, 0.7);
+    }
+
+    /* Main Viewport */
+    main.storybook-stage {
+      width: 100%;
+      max-width: 880px;
+      padding: 6px 18px 24px;
+      z-index: 15;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .chapter-view {
+      display: none;
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      opacity: 0;
+      transform: translateY(18px) scale(0.99);
+      transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .chapter-view.active { display: flex; }
+    .chapter-view.visible { opacity: 1; transform: translateY(0) scale(1); }
+
+    /* Typography & Buttons */
+    .chapter-banner { text-align: center; margin-bottom: 14px; }
+
+    .eyebrow-script {
+      font-family: 'Caveat', cursive;
+      font-size: 1.6rem;
+      color: var(--velvet-rose);
+      display: block;
+      margin-bottom: 2px;
+    }
+    body[data-scene="4"] .eyebrow-script,
+    body[data-scene="7"] .eyebrow-script,
+    body[data-scene="8"] .eyebrow-script,
+    body[data-scene="10"] .eyebrow-script { color: var(--bright-gold); }
+
+    .imperial-heading {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: var(--deep-amethyst);
+      line-height: 1.25;
+      text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.75);
+    }
+    body[data-scene="4"] .imperial-heading,
+    body[data-scene="7"] .imperial-heading,
+    body[data-scene="8"] .imperial-heading,
+    body[data-scene="10"] .imperial-heading {
+      color: #fff9f0;
+      text-shadow: 0 2px 16px rgba(255, 209, 102, 0.45);
+    }
+
+    .imperial-sub {
+      font-size: 0.94rem;
+      color: var(--text-soft);
+      max-width: 600px;
+      margin: 6px auto 0;
+      line-height: 1.55;
+    }
+    body[data-scene="4"] .imperial-sub,
+    body[data-scene="7"] .imperial-sub,
+    body[data-scene="8"] .imperial-sub,
+    body[data-scene="10"] .imperial-sub { color: #eddaf7; }
+
+    .btn-imperial {
+      background: linear-gradient(135deg, #c93b64 0%, #6d2875 100%);
+      color: #fffdf8;
+      border: 2px solid #ffe8b3;
+      outline: 2px solid rgba(212, 163, 89, 0.55);
+      padding: 12px 28px;
+      border-radius: 40px;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.98rem;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      cursor: pointer;
+      box-shadow: 0 10px 26px rgba(109, 40, 117, 0.32);
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      user-select: none;
+    }
+    .btn-imperial:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 14px 30px rgba(109, 40, 117, 0.44);
+    }
+    .btn-imperial:active { transform: translateY(0) scale(0.98); }
+    .btn-imperial:disabled { opacity: 0.6; cursor: default; transform: none; }
+
+    .btn-gold-pill {
+      background: rgba(255, 253, 248, 0.95);
+      color: var(--deep-amethyst);
+      border: 2px solid var(--champagne-gold);
+      padding: 8px 18px;
+      border-radius: 30px;
+      font-family: inherit;
+      font-size: 0.84rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-gold-pill:hover { background: #fff7e6; transform: translateY(-2px); }
+
+    /* =========================================================================
+       GROUNDED SVG STAGE & CHARACTER ANIMATIONS
+       ========================================================================= */
+    .stage-box {
+      width: 100%;
+      max-width: 620px;
+      height: 255px;
+      position: relative;
+      margin: 4px auto 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .stage-svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      filter: drop-shadow(0 10px 18px rgba(59, 29, 84, 0.12));
+    }
+
+    .bear-eyes {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: blinkEyes 4.5s infinite;
+    }
+    @keyframes blinkEyes {
+      0%, 94%, 98%, 100% { transform: scaleY(1); }
+      96% { transform: scaleY(0.1); }
+    }
+
+    .gentle-bob-dudu {
+      transform-box: fill-box;
+      transform-origin: center bottom;
+      animation: duduSway 3.1s ease-in-out infinite alternate;
+    }
+    .gentle-bob-bubu {
+      transform-box: fill-box;
+      transform-origin: center bottom;
+      animation: bubuSway 3.1s ease-in-out infinite alternate -1.5s;
+    }
+    @keyframes duduSway {
+      0% { transform: translateY(0px) rotate(-1.2deg); }
+      100% { transform: translateY(-4px) rotate(1.5deg); }
+    }
+    @keyframes bubuSway {
+      0% { transform: translateY(0px) rotate(1.2deg); }
+      100% { transform: translateY(-4px) rotate(-1.5deg); }
+    }
+
+    /* =========================================================================
+       OPENING SCENE (0): ROYAL ENVELOPE & INVITATION
+       ========================================================================= */
+    body[data-scene="0"] {
+      height: 100vh;
+      overflow: hidden;
+      padding-bottom: 0;
+    }
+    body[data-scene="0"] main.storybook-stage {
+      flex: 1;
+      justify-content: center;
+      padding-top: 0;
+      padding-bottom: 12px;
+    }
+    .envelope-wrap {
+      width: 100%;
+      max-width: 510px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .royal-envelope-card {
+      width: 100%;
+      background: linear-gradient(165deg, #fffdf9 0%, #f7ebff 55%, #ffe4ee 100%);
+      border: 3px solid var(--champagne-gold);
+      outline: 2px solid rgba(201, 59, 100, 0.35);
+      border-radius: 26px;
+      padding: 38px 26px 32px;
+      text-align: center;
+      box-shadow: var(--shadow-imperial);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.65s ease, opacity 0.55s ease;
+    }
+
+    .royal-envelope-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 90px;
+      background: linear-gradient(180deg, rgba(212, 163, 89, 0.25) 0%, rgba(255, 255, 255, 0) 100%);
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      pointer-events: none;
+    }
+
+    .imperial-wax-seal {
+      width: 66px;
+      height: 66px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #e63968, #7b1fa2);
+      border: 3px solid var(--bright-gold);
+      color: #fff9e6;
+      font-size: 1.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      box-shadow: 0 8px 18px rgba(123, 31, 162, 0.35);
+    }
+
+    .royal-envelope-card.opened {
+      transform: scale(0.92) translateY(-16px);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .royal-invitation-parchment {
+      display: none;
+      width: 100%;
+      max-width: 560px;
+      background: linear-gradient(180deg, #fffefb 0%, #fbf3ff 100%);
+      border: 3px double var(--champagne-gold);
+      outline: 2px solid #e5b8f4;
+      border-radius: 24px;
+      padding: 18px 24px 20px;
+      text-align: center;
+      box-shadow: var(--shadow-imperial);
+      opacity: 0;
+      transform: translateY(24px) scale(0.94);
+      transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .royal-invitation-parchment.revealed { opacity: 1; transform: translateY(0) scale(1); }
+
+    .crown-float-entrance {
+      width: 78px;
+      height: 46px;
+      margin: 0 auto 4px;
+      opacity: 0;
+      transform: translateY(-22px) scale(0.7);
+      transition: opacity 0.85s ease 0.25s, transform 0.85s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s;
+    }
+    .royal-invitation-parchment.revealed .crown-float-entrance { opacity: 1; transform: translateY(0) scale(1); }
+
+    /* =========================================================================
+       CHAPTER 1: WELCOME TO YOUR KINGDOM (Castle + Crown Placement)
+       ========================================================================= */
+    .parchment-box {
+      background: var(--glass-card);
+      backdrop-filter: blur(10px);
+      border: 2px solid #ffffff;
+      outline: 1.5px solid var(--champagne-gold);
+      border-radius: 22px;
+      padding: 20px 24px;
+      max-width: 640px;
+      width: 100%;
+      text-align: center;
+      line-height: 1.68;
+      font-size: 0.96rem;
+      box-shadow: var(--shadow-imperial);
+      margin-bottom: 14px;
+    }
+    .parchment-box p { margin-bottom: 10px; }
+    .parchment-box p:last-child { margin-bottom: 0; }
+
+    #ch1DuduInner, #ch1BubuInner {
+      transform-box: fill-box;
+      transform-origin: center bottom;
+      transition: transform 0.85s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .ch1-kneeling #ch1DuduInner { transform: translateX(18px) translateY(8px) rotate(7deg); }
+
+    #bubuRoyalTiara {
+      opacity: 0;
+      transform-box: view-box;
+      transform-origin: 0px -158px;
+      transform: translateY(-32px) scale(0.75);
+      transition: opacity 0.5s ease, transform 0.95s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .crown-placed #bubuRoyalTiara { opacity: 1; transform: translateY(0px) scale(1); }
+    .crown-placed #duduPresentedCrown { opacity: 0; transition: opacity 0.3s ease; }
+    .crown-placed #ch1DuduInner {
+      transform: translateX(26px) translateY(0px) rotate(3deg);
+      animation: duduJoyHop 0.7s ease-in-out infinite alternate;
+    }
+    .crown-placed #ch1BubuInner { transform: translateX(-22px) rotate(-2deg); }
+
+    @keyframes duduJoyHop {
+      0% { transform: translateX(26px) translateY(0px) rotate(2deg); }
+      100% { transform: translateX(26px) translateY(-9px) rotate(5deg); }
+    }
+
+    /* =========================================================================
+       CHAPTER 2: WHY YOU ARE MY PRINCESS (6 Royal Cards)
+       ========================================================================= */
+    .royal-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      width: 100%;
+      max-width: 820px;
+      margin: 8px 0 18px;
+    }
+
+    .virtue-card {
+      background: linear-gradient(160deg, #fffefc 0%, #f6ebff 100%);
+      border: 2px solid var(--champagne-gold);
+      border-radius: 20px;
+      padding: 20px 16px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(59, 29, 84, 0.1);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, background 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 175px;
+      user-select: none;
+    }
+    .virtue-card:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 14px 28px rgba(201, 59, 100, 0.2); }
+    .virtue-card.revealed { background: linear-gradient(160deg, #fff9ef 0%, #ffe6f0 100%); border-color: var(--velvet-rose); }
+
+    .virtue-crest {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 2px solid var(--champagne-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      margin-bottom: 10px;
+      box-shadow: 0 4px 10px rgba(212, 163, 89, 0.25);
+    }
+
+    .virtue-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--deep-amethyst);
+      margin-bottom: 6px;
+    }
+    .virtue-hint { font-size: 0.76rem; color: var(--text-soft); font-style: italic; }
+    .virtue-text { font-size: 0.88rem; line-height: 1.55; color: var(--text-royal); display: none; }
+    .virtue-card.revealed .virtue-hint { display: none; }
+    .virtue-card.revealed .virtue-text { display: block; }
+
+    /* =========================================================================
+       CHAPTER 3: SIX ROYAL PROMISES
+       ========================================================================= */
+    .promises-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      width: 100%;
+      max-width: 800px;
+      margin: 8px 0 18px;
+    }
+
+    .promise-card {
+      background: linear-gradient(180deg, #fffdf8 0%, #f9f0ff 100%);
+      border: 2px solid var(--champagne-gold);
+      border-radius: 20px;
+      padding: 18px 20px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(59, 29, 84, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-height: 112px;
+      text-align: left;
+      user-select: none;
+    }
+    .promise-card:hover { transform: translateY(-4px); box-shadow: 0 12px 26px rgba(201, 59, 100, 0.16); }
+
+    .gold-seal-badge {
+      flex-shrink: 0;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #ffe082, #d4a037);
+      border: 2.5px solid #fff8e1;
+      color: #4a2c00;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(212, 160, 55, 0.38);
+      transition: transform 0.4s ease, background 0.4s ease;
+    }
+    .promise-card.opened .gold-seal-badge {
+      background: radial-gradient(circle at 35% 35%, #e63968, #7b1fa2);
+      color: #fff;
+      transform: rotate(12deg) scale(1.05);
+    }
+
+    /* =========================================================================
+       CHAPTER 4 (NEW): THE ROYAL CARRIAGE RIDE THROUGH THE STARLIT CLOUDS
+       ========================================================================= */
+    .carriage-window-card {
+      background: rgba(34, 18, 56, 0.78);
+      backdrop-filter: blur(10px);
+      border: 2.5px solid var(--champagne-gold);
+      border-radius: 28px;
+      padding: 20px 22px 24px;
+      width: 100%;
+      max-width: 720px;
+      box-shadow: 0 22px 50px rgba(15, 8, 30, 0.45);
+      text-align: center;
+    }
+
+    #royalCarriageGroup {
+      transform-box: fill-box;
+      transform-origin: center bottom;
+      animation: carriageFloatRide 2.8s ease-in-out infinite alternate;
+    }
+    @keyframes carriageFloatRide {
+      0% { transform: translateY(0px) rotate(-1deg); }
+      100% { transform: translateY(-9px) rotate(1deg); }
+    }
+    #royalCarriageGroup.wish-glide {
+      animation: carriageWishSweep 1.2s cubic-bezier(0.34, 1.56, 0.64, 1), carriageFloatRide 2.8s ease-in-out infinite alternate 1.2s;
+    }
+    @keyframes carriageWishSweep {
+      0% { transform: translateX(-28px) translateY(6px) rotate(-4deg) scale(0.97); }
+      55% { transform: translateX(26px) translateY(-12px) rotate(4deg) scale(1.04); }
+      100% { transform: translateX(0px) translateY(-4px) rotate(0deg) scale(1); }
+    }
+
+    .carriage-wheel-spin {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: spinWheel 6s linear infinite;
+    }
+    @keyframes spinWheel {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .star-wish-btn-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 12px 0 14px;
+    }
+
+    .wish-star-pill {
+      background: rgba(255, 253, 248, 0.14);
+      border: 1.5px solid var(--bright-gold);
+      color: #fff8eb;
+      padding: 7px 15px;
+      border-radius: 24px;
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .wish-star-pill:hover, .wish-star-pill.lit {
+      background: var(--bright-gold);
+      color: #3b1d54;
+      box-shadow: 0 0 16px rgba(255, 209, 102, 0.7);
+    }
+
+    /* =========================================================================
+       CHAPTER 5: THE ROYAL TREASURE ROOM
+       ========================================================================= */
+    .treasure-chamber {
+      background: var(--glass-card);
+      border: 2.5px solid var(--champagne-gold);
+      border-radius: 26px;
+      padding: 22px 20px;
+      width: 100%;
+      max-width: 740px;
+      box-shadow: var(--shadow-imperial);
+      text-align: center;
+    }
+
+    .treasure-pedestal-btn {
+      background: linear-gradient(160deg, #fffdf9 0%, #f5eaff 100%);
+      border: 2px solid var(--champagne-gold);
+      border-radius: 18px;
+      padding: 16px 12px;
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      user-select: none;
+    }
+    .treasure-pedestal-btn:hover { transform: translateY(-6px) scale(1.04); box-shadow: 0 12px 24px rgba(212, 163, 89, 0.3); }
+    .treasure-pedestal-btn.opened { border-color: var(--velvet-rose); background: linear-gradient(160deg, #fff8eb 0%, #ffe3ef 100%); }
+
+    /* =========================================================================
+       CHAPTER 6: NEW INTERACTIVE MINI-GAME — "CATCH FALLING STARLIGHT & PETALS FOR BUBU'S TIARA"
+       (Completely new, skill + reflex + power-up catching & magic wand game!)
+       ========================================================================= */
+    .tiara-game-shell {
+      background: rgba(255, 253, 250, 0.95);
+      border: 2.5px solid var(--champagne-gold);
+      border-radius: 26px;
+      padding: 16px;
+      width: 100%;
+      max-width: 680px;
+      box-shadow: var(--shadow-imperial);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .game-top-hud {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      background: #f8effc;
+      border: 1.5px solid #e2c6f5;
+      border-radius: 16px;
+      padding: 9px 14px;
+      margin-bottom: 10px;
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
+    .tiara-progress-track {
+      width: 100%;
+      height: 12px;
+      background: #efe2f7;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 10px;
+      border: 1px solid #dec2f0;
+    }
+    .tiara-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ff7597, #ffd166, #9d4edd);
+      transition: width 0.3s ease;
+    }
+
+    .catching-arena {
+      width: 100%;
+      height: 300px;
+      border-radius: 18px;
+      border: 2px solid var(--champagne-gold);
+      overflow: hidden;
+      background: linear-gradient(180deg, #24143b 0%, #4b2563 58%, #ffdce8 100%);
+      position: relative;
+      touch-action: none;
+      user-select: none;
+    }
+
+    canvas#tiaraCatchCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      cursor: ew-resize;
+    }
+
+    .catcher-touch-row {
+      display: flex;
+      gap: 18px;
+      margin-top: 12px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide-pad-btn {
+      background: #ffffff;
+      border: 2px solid var(--royal-plum);
+      color: var(--deep-amethyst);
+      padding: 10px 26px;
+      border-radius: 30px;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(59, 29, 84, 0.14);
+      user-select: none;
+      touch-action: manipulation;
+    }
+    .slide-pad-btn:active { background: var(--royal-plum); color: #fff; transform: scale(0.95); }
+
+    /* =========================================================================
+       CHAPTER 7 (NEW): THE ROYAL MIRROR OF ADMIRATION
+       ========================================================================= */
+    .magic-mirror-frame {
+      background: linear-gradient(165deg, rgba(255, 250, 240, 0.94) 0%, rgba(246, 232, 255, 0.94) 100%);
+      border: 4px solid var(--champagne-gold);
+      outline: 3px solid rgba(255, 209, 102, 0.45);
+      border-radius: 140px 140px 28px 28px;
+      padding: 34px 26px 28px;
+      width: 100%;
+      max-width: 540px;
+      text-align: center;
+      box-shadow: 0 0 45px rgba(255, 209, 102, 0.35), var(--shadow-imperial);
+      color: var(--text-royal);
+      position: relative;
+    }
+
+    .mirror-reflection-glass {
+      background: radial-gradient(circle at center, #ffffff 0%, #f9edff 65%, #ffe5f0 100%);
+      border: 2.5px solid #e6be8a;
+      border-radius: 36px 36px 22px 22px;
+      padding: 26px 32px;
+      margin: 14px 8px 18px;
+      min-height: 165px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 0 24px rgba(212, 163, 89, 0.25);
+    }
+
+    /* =========================================================================
+       CHAPTER 8 (NEW): THE ROYAL TEA PARTY & ROSE GARDEN PICNIC
+       ========================================================================= */
+    .tea-party-card {
+      background: rgba(34, 20, 56, 0.82);
+      border: 2px solid var(--champagne-gold);
+      border-radius: 26px;
+      padding: 20px 20px 24px;
+      width: 100%;
+      max-width: 700px;
+      text-align: center;
+      box-shadow: 0 20px 46px rgba(10, 6, 22, 0.45);
+    }
+
+    .tea-treats-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 12px 0 14px;
+    }
+
+    .treat-btn {
+      background: rgba(255, 253, 248, 0.94);
+      border: 2px solid var(--champagne-gold);
+      color: var(--deep-amethyst);
+      padding: 8px 16px;
+      border-radius: 24px;
+      font-family: inherit;
+      font-size: 0.84rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+    .treat-btn:hover { transform: translateY(-2px); background: #fff4d6; }
+
+    /* =========================================================================
+       CHAPTER 9: A DANCE WITH MY PRINCESS (Royal Ballroom)
+       ========================================================================= */
+    .ballroom-hall-card {
+      background: linear-gradient(180deg, #fff9f0 0%, #f5e6ff 55%, #ffe4ee 100%);
+      border: 2.5px solid var(--champagne-gold);
+      border-radius: 28px;
+      padding: 18px 20px 24px;
+      width: 100%;
+      max-width: 680px;
+      box-shadow: var(--shadow-imperial);
+      text-align: center;
+    }
+
+    #ballroomDancePair {
+      transform-box: fill-box;
+      transform-origin: center bottom;
+    }
+    #ch9DuduInner, #ch9BubuInner {
+      transform-box: fill-box;
+      transform-origin: center bottom;
+      transition: transform 0.9s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .ballroom-dancing #ch9DuduInner { transform: translateX(30px); }
+    .ballroom-dancing #ch9BubuInner { transform: translateX(-30px); }
+    .ballroom-dancing #ballroomDancePair {
+      animation: waltzGlide 2.4s ease-in-out infinite alternate;
+    }
+    @keyframes waltzGlide {
+      0% { transform: translateX(-18px) rotate(-2.5deg); }
+      50% { transform: translateX(0px) translateY(-6px) rotate(0deg); }
+      100% { transform: translateX(18px) rotate(2.5deg); }
+    }
+
+    /* =========================================================================
+       CHAPTER 10: A LETTER FROM YOUR PRINCE & FINAL SCENE (11)
+       ========================================================================= */
+    .prince-letter-card {
+      background: linear-gradient(180deg, #fffefb 0%, #faf0ff 100%);
+      border: 3px double var(--champagne-gold);
+      outline: 2px solid #e0c3fc;
+      border-radius: 24px;
+      padding: 28px 30px;
+      width: 100%;
+      max-width: 650px;
+      box-shadow: var(--shadow-imperial);
+      line-height: 1.75;
+      font-size: 0.97rem;
+      color: var(--text-royal);
+    }
+    .prince-letter-card p { margin-bottom: 12px; }
+
+    .imperial-seal-badge {
+      margin: 20px auto 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 22px;
+      border: 2.5px dashed var(--velvet-rose);
+      border-radius: 40px;
+      background: rgba(243, 232, 255, 0.75);
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: var(--deep-amethyst);
+      letter-spacing: 1px;
+      opacity: 0;
+      transform: scale(1.3) rotate(-4deg);
+      transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .imperial-seal-badge.stamped { opacity: 1; transform: scale(1) rotate(-2deg); }
+
+    /* Final Night Castle Scene */
+    .finale-night-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      background: rgba(24, 16, 48, 0.82);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 209, 102, 0.6);
+      border-radius: 28px;
+      padding: 20px 20px 26px;
+      width: 100%;
+      max-width: 720px;
+      box-shadow: 0 22px 54px rgba(8, 4, 20, 0.55);
+      text-align: center;
+    }
+
+    #ch10DuduInner, #ch10BubuInner {
+      transform-box: fill-box;
+      transform-origin: center bottom;
+      transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .night-seq-hug #ch10DuduInner { transform: translateX(34px) rotate(4deg); }
+    .night-seq-hug #ch10BubuInner { transform: translateX(-34px) rotate(-4deg); }
+    .night-seq-lean #ch10DuduInner { transform: translateX(28px) rotate(2deg); }
+    .night-seq-lean #ch10BubuInner { transform: translateX(-28px) rotate(-8deg); }
+    .night-seq-stars #ch10DuduInner { transform: translateX(24px) rotate(1deg); }
+    .night-seq-stars #ch10BubuInner { transform: translateX(-24px) rotate(-2deg); }
+
+    #finaleConstellation { opacity: 0; transition: opacity 1.4s ease; }
+    .night-seq-stars #finaleConstellation { opacity: 1; }
+
+    .final-scroll-box {
+      margin-top: 16px;
+      background: rgba(255, 253, 249, 0.96);
+      color: var(--text-royal);
+      border: 3px double var(--bright-gold);
+      border-radius: 22px;
+      padding: 24px 26px;
+      max-width: 630px;
+      width: 100%;
+      line-height: 1.72;
+      font-size: 0.96rem;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 1s ease, transform 1s ease;
+      display: none;
+    }
+    .final-scroll-box.shown { display: block; opacity: 1; transform: translateY(0); }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(28, 12, 42, 0.6);
+      backdrop-filter: blur(5px);
+      z-index: 250;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .modal-backdrop.active { display: flex; }
+    .modal-backdrop.visible { opacity: 1; }
+
+    .modal-card {
+      background: linear-gradient(180deg, #fffefb 0%, #f6ebff 100%);
+      border: 3px double var(--champagne-gold);
+      border-radius: 24px;
+      padding: 28px 26px;
+      max-width: 460px;
+      width: 100%;
+      text-align: center;
+      color: var(--text-royal);
+      box-shadow: 0 22px 50px rgba(18, 6, 30, 0.45);
+      transform: scale(0.92);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .modal-backdrop.visible .modal-card { transform: scale(1); }
+
+    canvas#fairytaleParticles {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 180;
+    }
+
+    @media (max-width: 720px) {
+      .royal-grid-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 540px) {
+      .royal-topbar { padding: 14px 16px 4px; }
+      .crest-title { font-size: 0.88rem; }
+      .crest-subtitle { font-size: 0.64rem; }
+      .imperial-heading { font-size: 1.45rem; }
+      .royal-grid-3, .promises-grid { grid-template-columns: 1fr; gap: 12px; }
+      .stage-box { height: 215px; }
+      .catching-arena { height: 265px; }
+      .prince-letter-card, .final-scroll-box { padding: 18px 16px; font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body data-scene="0">
+
+  <div class="filigree-frame-border" aria-hidden="true"></div>
+
+  <!-- Reusable Exact Dudu & Princess Bubu SVG Symbols -->
+  <svg width="0" height="0" style="position:absolute; pointer-events:none;" aria-hidden="true">
+    <defs>
+      <!-- Exact Dudu Character -->
+      <g id="princeDudu">
+        <circle cx="-44" cy="-136" r="14" fill="#d3a17e" stroke="#4a2c20" stroke-width="3.2"/>
+        <circle cx="-44" cy="-136" r="7" fill="#4a2c20"/>
+        <circle cx="44" cy="-136" r="14" fill="#d3a17e" stroke="#4a2c20" stroke-width="3.2"/>
+        <circle cx="44" cy="-136" r="7" fill="#4a2c20"/>
+        <path d="M -38,-58 C -46,-35 -44,-6 -36,8 C -32,14 -18,14 -14,6 C -10,0 -6,0 0,0 C 6,0 10,0 14,6 C 18,14 32,14 36,8 C 44,-6 46,-35 38,-58 Z"
+              fill="#d3a17e" stroke="#4a2c20" stroke-width="3.2" stroke-linejoin="round"/>
+        <path d="M 0,-148 C -48,-148 -64,-118 -62,-86 C -60,-58 -38,-46 0,-46 C 38,-46 60,-58 62,-86 C 64,-118 48,-148 0,-148 Z"
+              fill="#d3a17e" stroke="#4a2c20" stroke-width="3.2" stroke-linejoin="round"/>
+        <ellipse cx="-44" cy="-78" rx="13" ry="9.5" fill="#f7b186" opacity="0.88"/>
+        <ellipse cx="44" cy="-78" rx="13" ry="9.5" fill="#f7b186" opacity="0.88"/>
+        <g class="bear-eyes">
+          <circle cx="-24" cy="-89" r="5.2" fill="#4a2c20"/>
+          <circle cx="-25.5" cy="-90.8" r="1.8" fill="#ffffff"/>
+          <circle cx="24" cy="-89" r="5.2" fill="#4a2c20"/>
+          <circle cx="22.5" cy="-90.8" r="1.8" fill="#ffffff"/>
+        </g>
+        <path d="M -7,-86 Q -3.5,-82 0,-86 Q 3.5,-82 7,-86" fill="none" stroke="#4a2c20" stroke-width="2.6" stroke-linecap="round"/>
+        <path d="M -5,-85 C -5,-76 5,-76 5,-85 Z" fill="#ff5c77" stroke="#4a2c20" stroke-width="2.2"/>
+        <!-- Royal Prince Navy & Gold Bowtie -->
+        <g transform="translate(0, -45)">
+          <polygon points="0,0 -16,-7 -16,7" fill="#3b1d54" stroke="#4a2c20" stroke-width="2.2" stroke-linejoin="round"/>
+          <polygon points="0,0 16,-7 16,7" fill="#3b1d54" stroke="#4a2c20" stroke-width="2.2" stroke-linejoin="round"/>
+          <circle cx="0" cy="0" r="4.5" fill="#ffd166" stroke="#4a2c20" stroke-width="2"/>
+        </g>
+        <ellipse cx="-28" cy="-24" rx="9.5" ry="7.5" transform="rotate(20 -28 -24)" fill="#d3a17e" stroke="#4a2c20" stroke-width="2.8"/>
+        <ellipse cx="28" cy="-24" rx="9.5" ry="7.5" transform="rotate(-20 28 -24)" fill="#d3a17e" stroke="#4a2c20" stroke-width="2.8"/>
+      </g>
+
+      <!-- Exact Bubu Character in Royal Lilac-Pink Gown -->
+      <g id="princessBubuBase">
+        <circle cx="-44" cy="-136" r="14" fill="#4a2c20" stroke="#4a2c20" stroke-width="3"/>
+        <circle cx="44" cy="-136" r="14" fill="#4a2c20" stroke="#4a2c20" stroke-width="3"/>
+        <path d="M -38,-58 C -46,-35 -44,-6 -36,8 C -32,14 -18,14 -14,6 C -10,0 -6,0 0,0 C 6,0 10,0 14,6 C 18,14 32,14 36,8 C 44,-6 46,-35 38,-58 Z"
+              fill="#ffffff" stroke="#4a2c20" stroke-width="3.2" stroke-linejoin="round"/>
+        <ellipse cx="-26" cy="10" rx="9" ry="4" fill="#4a2c20"/>
+        <ellipse cx="26" cy="10" rx="9" ry="4" fill="#4a2c20"/>
+        <!-- Princess Gown Skirt with Gold Trim -->
+        <path d="M -36,-46 L -48,-6 Q -24,4 0,-6 Q 24,4 48,-6 L 36,-46 Z"
+              fill="#f3b8d8" stroke="#4a2c20" stroke-width="2.8" stroke-linejoin="round"/>
+        <path d="M -45,-12 Q -22,-3 0,-12 Q 22,-3 45,-12" fill="none" stroke="#ffd166" stroke-width="2.5"/>
+        <path d="M -36,-52 Q 0,-42 36,-52" fill="none" stroke="#4a2c20" stroke-width="4.2" stroke-linecap="round"/>
+        <g transform="translate(0, -45)">
+          <ellipse cx="-6" cy="3" rx="6" ry="4.5" transform="rotate(-25 -6 3)" fill="#4a2c20"/>
+          <ellipse cx="6" cy="3" rx="6" ry="4.5" transform="rotate(25 6 3)" fill="#4a2c20"/>
+        </g>
+        <path d="M 0,-148 C -48,-148 -64,-118 -62,-86 C -60,-58 -38,-46 0,-46 C 38,-46 60,-58 62,-86 C 64,-118 48,-148 0,-148 Z"
+              fill="#ffffff" stroke="#4a2c20" stroke-width="3.2" stroke-linejoin="round"/>
+        <!-- Signature Pink Ear Bow -->
+        <g transform="translate(-38, -136) rotate(-22)">
+          <path d="M 0,0 C -18,-14 -22,12 0,4 Z" fill="#ff85a1" stroke="#4a2c20" stroke-width="2.4" stroke-linejoin="round"/>
+          <path d="M 0,0 C 18,-14 22,12 0,4 Z" fill="#ff85a1" stroke="#4a2c20" stroke-width="2.4" stroke-linejoin="round"/>
+          <circle cx="0" cy="1" r="5" fill="#ff5c77" stroke="#4a2c20" stroke-width="2.2"/>
+        </g>
+        <ellipse cx="-44" cy="-78" rx="13" ry="9.5" fill="#ffaec0" opacity="0.88"/>
+        <ellipse cx="44" cy="-78" rx="13" ry="9.5" fill="#ffaec0" opacity="0.88"/>
+        <g class="bear-eyes">
+          <circle cx="-24" cy="-89" r="5.2" fill="#4a2c20"/>
+          <circle cx="-25.5" cy="-90.8" r="1.8" fill="#ffffff"/>
+          <circle cx="24" cy="-89" r="5.2" fill="#4a2c20"/>
+          <circle cx="22.5" cy="-90.8" r="1.8" fill="#ffffff"/>
+        </g>
+        <path d="M -7,-86 Q -3.5,-82 0,-86 Q 3.5,-82 7,-86" fill="none" stroke="#4a2c20" stroke-width="2.6" stroke-linecap="round"/>
+        <path d="M -5,-85 C -5,-76 5,-76 5,-85 Z" fill="#ff5c77" stroke="#4a2c20" stroke-width="2.2"/>
+        <ellipse cx="-28" cy="-24" rx="9.5" ry="7.5" transform="rotate(20 -28 -24)" fill="#ffffff" stroke="#4a2c20" stroke-width="2.8"/>
+        <ellipse cx="28" cy="-24" rx="9.5" ry="7.5" transform="rotate(-20 28 -24)" fill="#ffffff" stroke="#4a2c20" stroke-width="2.8"/>
+      </g>
+
+      <!-- Golden Princess Tiara -->
+      <g id="goldenCrownGraphic">
+        <path d="M -22,6 L -26,-12 L -11,-2 L 0,-18 L 11,-2 L 26,-12 L 22,6 Z"
+              fill="#ffd166" stroke="#4a2c20" stroke-width="2.4" stroke-linejoin="round"/>
+        <circle cx="0" cy="-20" r="3" fill="#e63968" stroke="#4a2c20" stroke-width="1.5"/>
+        <circle cx="-26" cy="-14" r="2.5" fill="#fff6e5" stroke="#4a2c20" stroke-width="1.5"/>
+        <circle cx="26" cy="-14" r="2.5" fill="#fff6e5" stroke="#4a2c20" stroke-width="1.5"/>
+        <circle cx="0" cy="-2" r="3" fill="#9d4edd"/>
+      </g>
+
+      <!-- Pink Rose -->
+      <g id="pinkRoseGraphic">
+        <circle cx="0" cy="0" r="10" fill="#ff5c77" stroke="#4a2c20" stroke-width="2"/>
+        <path d="M -4,-2 Q 0,-6 4,-2 Q 0,4 -4,-2" fill="none" stroke="#4a2c20" stroke-width="1.6"/>
+      </g>
+    </defs>
+  </svg>
+
+  <!-- Ambient Royal Orbs -->
+  <div class="imperial-backdrop" aria-hidden="true">
+    <div class="royal-aura aura-gold"></div>
+    <div class="royal-aura aura-lilac"></div>
+    <div class="royal-aura aura-rose"></div>
+  </div>
+
+  <!-- Top Royal Header -->
+  <header class="royal-topbar">
+    <div class="royal-crest-brand">
+      <span class="crest-title">AMMARA'S KINGDOM 👑</span>
+      <span class="crest-subtitle">A Fairytale Crafted Just For My Little Princess</span>
+    </div>
+    <div class="topbar-actions">
+      <span class="chapter-pill" id="sceneProgressLabel">Royal Invitation</span>
+      <button class="royal-icon-btn muted" id="btnToggleMusic" aria-label="Toggle Fairytale Music" title="Toggle Fairytale Music">🎵</button>
+      <button class="royal-icon-btn" id="btnToggleSfx" aria-label="Toggle Sound Effects" title="Toggle Sound Effects">🔊</button>
+    </div>
+  </header>
+
+  <div class="journey-trail" id="journeyTrailBar" aria-hidden="true"></div>
+
+  <main class="storybook-stage">
+
+    <!-- =======================================================================
+         OPENING SCENE (0): MAGICAL ENVELOPE & ROYAL INVITATION
+         ======================================================================= -->
+    <section class="chapter-view active visible" id="scene0" aria-label="Opening Royal Invitation">
+      <div class="envelope-wrap">
+        <div class="royal-envelope-card" id="royalEnvelopeBox">
+          <div class="imperial-wax-seal">👑</div>
+          <span class="eyebrow-script">Happy Princess Day</span>
+          <h1 class="imperial-heading" style="font-size:1.75rem; margin: 6px 0 18px;">
+            To My Dearest Begum Jaan
+          </h1>
+          <button class="btn-imperial" id="btnOpenInvitation">Open Your Royal Invitation</button>
+        </div>
+
+        <article class="royal-invitation-parchment" id="invitationScrollCard">
+          <div class="crown-float-entrance">
+            <svg viewBox="-35 -28 70 42" width="100%" height="100%">
+              <use href="#goldenCrownGraphic"/>
+            </svg>
+          </div>
+          <span class="eyebrow-script">Official Royal Decree</span>
+          <h2 class="imperial-heading" style="font-size:1.55rem; margin-bottom:14px;">
+            Your Magical Celebration Awaits
+          </h2>
+          <div style="font-size:0.98rem; line-height:1.75; margin-bottom:20px;">
+            <p style="margin-bottom:10px;">
+              By the royal request of Your Loving Shohar, the most Precious Princess of this little Kingdom is hereby invited to a magical celebration. This kingdom has only one Queen, one Princess, and one reason to Shine.
+            </p>
+            <p style="font-weight:700; color:var(--velvet-rose); font-size:1.06rem;">
+              And that princess is YOU, my Shehzaduuu..!!
+            </p>
+          </div>
+          <button class="btn-imperial" id="btnEnterKingdom">Accept Invitation</button>
+        </article>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         CHAPTER ONE (1): WELCOME TO YOUR KINGDOM
+         ======================================================================= -->
+    <section class="chapter-view" id="scene1" aria-label="Chapter 1: Welcome to Your Kingdom">
+      <div class="chapter-banner">
+        <span class="eyebrow-script">Chapter I — The Coronation Garden</span>
+        <h2 class="imperial-heading">Welcome to Your Little Kingdom, My Sweet Begum</h2>
+      </div>
+
+      <div class="stage-box ch1-kneeling" id="ch1KingdomStage" style="height: 265px; max-width: 640px;">
+        <svg class="stage-svg" viewBox="0 0 620 265">
+          <!-- Fairytale Lavender-Pink & Gold Castle -->
+          <g opacity="0.95">
+            <rect x="175" y="95" width="42" height="135" fill="#f3d5ff" stroke="#c77dff" stroke-width="2"/>
+            <polygon points="170,95 196,52 222,95" fill="#e0aaff" stroke="#7b2cbf" stroke-width="2"/>
+            <rect x="403" y="95" width="42" height="135" fill="#f3d5ff" stroke="#c77dff" stroke-width="2"/>
+            <polygon points="398,95 424,52 450,95" fill="#e0aaff" stroke="#7b2cbf" stroke-width="2"/>
+            <rect x="235" y="68" width="150" height="162" fill="#ffe5f0" stroke="#e5989b" stroke-width="2"/>
+            <polygon points="228,68 310,12 392,68" fill="#ff7597" stroke="#c93b64" stroke-width="2"/>
+            <path d="M310,88 C304,80 294,84 294,92 C294,100 310,108 310,113 C310,108 326,100 326,92 C326,84 316,80 310,88 Z" fill="#ffd166"/>
+            <path d="M 285,230 L 285,175 C 285,155 335,155 335,175 L 335,230 Z" fill="#fffdf8" stroke="#d4a359" stroke-width="2.5"/>
+          </g>
+
+          <ellipse cx="310" cy="238" rx="240" ry="18" fill="#e0fbfc" stroke="#b8c0ff" stroke-width="2"/>
+          <g transform="translate(115, 228)"><use href="#pinkRoseGraphic"/></g>
+          <g transform="translate(145, 234)"><use href="#pinkRoseGraphic"/></g>
+          <g transform="translate(475, 234)"><use href="#pinkRoseGraphic"/></g>
+          <g transform="translate(505, 228)"><use href="#pinkRoseGraphic"/></g>
+
+          <!-- Prince Dudu (Grounded at X=230, Y=230) -->
+          <g transform="translate(230, 230)">
+            <g id="ch1DuduInner">
+              <use href="#princeDudu"/>
+              <g id="duduPresentedCrown" transform="translate(42, -46) scale(0.75)">
+                <use href="#goldenCrownGraphic"/>
+              </g>
+            </g>
+          </g>
+
+          <!-- Princess Bubu (Grounded at X=385, Y=230) -->
+          <g transform="translate(385, 230)">
+            <g id="ch1BubuInner">
+              <g class="gentle-bob-bubu">
+                <use href="#princessBubuBase"/>
+                <g id="bubuRoyalTiara">
+                  <g transform="translate(0, -158) scale(0.82)">
+                    <use href="#goldenCrownGraphic"/>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <article class="parchment-box">
+        <p>
+          Once upon a time, there was a kingdom with beautiful gardens, a grand castle, and endless stars, yet it was nothing more than an ordinary place. Its flowers had no magic, its stars had no sparkle, and its castle had no warmth.
+        </p>
+        <p>
+          Then <strong> You </strong> came into my world, Sweetieee. And suddenly, everything began to shine. The flowers bloomed brighter, the stars sparkled more beautifully, and the little kingdom became magical. Because you were the magic it had been waiting for all along. 
+        </p>
+        <p style="color:var(--velvet-rose); font-weight:700;">
+          You are not just the Princess of this kingdom, my Girl. You are the magic that makes it beautiful ❤️👑
+        </p>
+      </article>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
+        <button class="btn-imperial" id="btnPlaceCrown">Place the Crown on My Princess 👑</button>
+        <button class="btn-imperial" id="btnToChapter2" style="display:none;">Discover Why You Are My Princess ✨</button>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         CHAPTER TWO (2): WHY YOU ARE MY PRINCESS
+         ======================================================================= -->
+    <section class="chapter-view" id="scene2" aria-label="Chapter 2: Why You Are My Princess">
+      <div class="chapter-banner">
+        <span class="eyebrow-script">Chapter II — Royal Virtues</span>
+        <h2 class="imperial-heading">Why You Are My Princess</h2>
+        <p class="imperial-sub">Tap each royal card to reveal what makes you royalty in your Humsafar's heart</p>
+      </div>
+
+      <div class="royal-grid-3" id="royalTraitsGrid"></div>
+
+      <button class="btn-imperial" id="btnToChapter3">Read Six Royal Promises 📜</button>
+    </section>
+
+    <!-- =======================================================================
+         CHAPTER THREE (3): SIX ROYAL PROMISES
+         ======================================================================= -->
+    <section class="chapter-view" id="scene3" aria-label="Chapter 3: Six Royal Promises">
+      <div class="chapter-banner">
+        <span class="eyebrow-script">Chapter III — Vows Sealed in Gold</span>
+        <h2 class="imperial-heading">Six Promises From Your Pagal</h2>
+        <p class="imperial-sub" id="promisesCounterText">Tap each golden seal to unroll Your promise (0 / 6 opened)</p>
+      </div>
+
+      <div class="promises-grid" id="royalPromisesGrid"></div>
+
+      <div id="promisesSignedBanner" style="display:none; text-align:center; margin: 6px 0 14px; background:rgba(255,253,248,0.92); padding:14px 24px; border-radius:20px; border:2px solid var(--champagne-gold);">
+        <p style="font-family:'Playfair Display',serif; font-size:1.12rem; color:var(--velvet-rose); font-weight:700;">
+          "Signed with all the love in Your Pagal's heart.<br>Your Pagal, forever proud to be Your prince."
+        </p>
+      </div>
+
+      <button class="btn-imperial" id="btnToChapter4">Step Into the Royal Starlight Carriage 🎠</button>
+    </section>
+
+    <!-- =======================================================================
+         CHAPTER FOUR (4 - NEW): THE ROYAL CARRIAGE RIDE AMONG THE STARS
+         ======================================================================= -->
+    <section class="chapter-view" id="scene4" aria-label="Chapter 4: The Royal Starlight Carriage">
+      <div class="chapter-banner">
+        <span class="eyebrow-script">Chapter IV — A Journey Above the Clouds</span>
+        <h2 class="imperial-heading">The Royal Carriage of Wishes</h2>
+        <p class="imperial-sub">
+          Prince has summoned a golden carriage to take his Princess gliding across the twilight sky. Tap each wishing star to light up Our future!
+        </p>
+      </div>
+
+      <div class="carriage-window-card">
+        <svg class="stage-svg" viewBox="0 0 600 245" style="max-height:235px;">
+          <!-- Crescent Moon & Starlight Trail -->
+          <circle cx="515" cy="48" r="24" fill="#fff3b0" opacity="0.9"/>
+          <circle cx="505" cy="42" r="20" fill="#3b1d54"/>
+          <path d="M 40,195 Q 300,155 560,185" fill="none" stroke="rgba(255, 209, 102, 0.35)" stroke-width="3" stroke-dasharray="8 8"/>
+
+          <!-- Floating Royal Carriage starting at Left End (X=115, Y=168) and advancing right with each wish -->
+          <g transform="translate(115, 168)">
+            <g id="royalCarriageTrack" style="transition: transform 1.15s cubic-bezier(0.22, 1, 0.36, 1);">
+              <g id="royalCarriageGroup">
+            <!-- Carriage Pumpkin-Shell Coach -->
+            <ellipse cx="0" cy="-36" rx="88" ry="56" fill="#ffd6e5" stroke="#ffd166" stroke-width="3.5"/>
+            <path d="M -52,-82 Q 0,-105 52,-82" fill="none" stroke="#ffd166" stroke-width="3"/>
+            <g transform="translate(0, -98) scale(0.75)"><use href="#goldenCrownGraphic"/></g>
+
+            <!-- Open Royal Window Showing Dudu & Bubu Riding Together -->
+            <rect x="-56" y="-68" width="112" height="52" rx="22" fill="#2b1742" stroke="#ffd166" stroke-width="2.5"/>
+            <g transform="translate(-24, -14) scale(0.42)"><use href="#princeDudu"/></g>
+            <g transform="translate(24, -14) scale(0.42)">
+              <use href="#princessBubuBase"/>
+              <g transform="translate(4, -152) scale(0.85)"><use href="#goldenCrownGraphic"/></g>
+            </g>
+
+            <!-- Golden Wheels -->
+            <g transform="translate(-52, 22)">
+              <g class="carriage-wheel-spin">
+                <circle cx="0" cy="0" r="22" fill="none" stroke="#ffd166" stroke-width="3.5"/>
+                <line x1="-22" y1="0" x2="22" y2="0" stroke="#ffd166" stroke-width="2"/>
+                <line x1="0" y1="-22" x2="0" y2="22" stroke="#ffd166" stroke-width="2"/>
+              </g>
+            </g>
+            <g transform="translate(52, 22)">
+              <g class="carriage-wheel-spin">
+                <circle cx="0" cy="0" r="22" fill="none" stroke="#ffd166" stroke-width="3.5"/>
+                <line x1="-22" y1="0" x2="22" y2="0" stroke="#ffd166" stroke-width="2"/>
+                <line x1="0" y1="-22" x2="0" y2="22" stroke="#ffd166" stroke-width="2"/>
+              </g>
+            </g>
+              </g>
+            </g>
+          </g>
+        </svg>
+
+        <div class="star-wish-btn-row" id="carriageWishesRow">
+          <button type="button" class="wish-star-pill" data-wish="Endless love together each day and night ✨">⭐ Wish I: Love</button>
+          <button type="button" class="wish-star-pill" data-wish="Safe travels and peaceful mornings always 🌸">⭐ Wish II: Peace</button>
+          <button type="button" class="wish-star-pill" data-wish="A love that grows kinder with every passing year 💗">⭐ Wish III: Forever</button>
+        </div>
+
+        <p id="carriageWishDisplay" style="font-family:'Playfair Display',serif; font-style:italic; font-size:1.06rem; color:#ffd166; min-height:28px; margin-bottom:14px;">
+          Tap a star above to send a wish into the night sky...
+        </p>
+
+        <button class="btn-imperial" id="btnToChapter5">Arrive at the Royal Treasure Room 💎</button>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         CHAPTER FIVE (5): THE ROYAL TREASURE ROOM
+         ======================================================================= -->
+    <section class="chapter-view" id="scene5" aria-label="Chapter 5: The Royal Treasure Room">
+      <div class="chapter-banner">
+        <span class="eyebrow-script">Chapter V — Jewels of the Heart</span>
+        <h2 class="imperial-heading">Every Princess Deserves Treasures</h2>
+        <p class="imperial-sub">Open each treasure from the royal chest to see what Your Life Partner has kept safe for You</p>
+      </div>
+
+      <div class="treasure-chamber">
+        <svg viewBox="0 0 160 72" width="120" height="54" style="margin: 0 auto 4px; display:block;">
+          <rect x="24" y="28" width="112" height="38" rx="6" fill="#c98a4b" stroke="#4a2c20" stroke-width="2.6"/>
+          <path d="M 20,28 Q 80,4 140,28 Z" fill="#e6be8a" stroke="#4a2c20" stroke-width="2.6"/>
+          <rect x="70" y="24" width="20" height="16" rx="3" fill="#ffd166" stroke="#4a2c20" stroke-width="2.2"/>
+          <circle cx="80" cy="32" r="2.5" fill="#4a2c20"/>
+        </svg>
+
+        <div class="royal-grid-3" id="treasuresGrid" style="margin: 12px 0 16px;"></div>
+
+        <p style="font-family:'Playfair Display',serif; font-style:italic; font-size:1.05rem; color:var(--deep-amethyst); margin-bottom:14px;">
+          "All the treasures in this world could never equal the treasure I found in you."
+        </p>
+
+        <button class="btn-imperial" id="btnToChapter6">Catch Starlight for my Cutie Pie ✨</button>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         CHAPTER SIX (6 - NEW GAME): CATCH FALLING STARLIGHT & ROSE PETALS
+         ======================================================================= -->
+    <section class="chapter-view" id="scene6" aria-label="Chapter 6: Catch Falling Starlight Mini-Game">
+      <div class="chapter-banner">
+        <span class="eyebrow-script">Chapter VI — The Starlight Catcher Quest</span>
+        <h2 class="imperial-heading">Gather Starlight &amp; Hearts for Begum's Crown ✨</h2>
+        <p class="imperial-sub">
+          Move left and right across the balcony to catch falling <strong>Golden Stars</strong>, <strong>Red Hearts</strong>, and <strong>Golden Crowns</strong> while dodging sleepy storm clouds!
+        </p>
+      </div>
+
+      <div class="tiara-game-shell">
+        <div class="game-top-hud">
+          <span id="tiaraMeterLabel" style="color:var(--velvet-rose);">Magic: 0% ✨</span>
+          <span id="tiaraComboLabel" style="color:var(--royal-plum);">Combo: 1x</span>
+          <button class="btn-gold-pill" id="btnRestartTiaraGame" style="padding:4px 12px; font-size:0.75rem;">Restart</button>
+        </div>
+
+        <div class="tiara-progress-track" aria-hidden="true">
+          <div class="tiara-progress-fill" id="tiaraProgressFill"></div>
+        </div>
+
+        <div class="catching-arena">
+          <canvas id="tiaraCatchCanvas" width="640" height="300"></canvas>
+        </div>
+
+        <div class="catcher-touch-row">
+          <button class="slide-pad-btn" id="btnMoveLeft" aria-label="Move Left">◀ Slide Left</button>
+          <button class="slide-pad-btn" id="btnMoveRight" aria-label="Move Right">Slide Right ▶</button>
+        </div>
+
+        <div id="tiaraGameWinPanel" style="display:none; text-align:center; margin-top:14px;">
+          <p style="font-family:'Playfair Display',serif; font-size:1.18rem; color:var(--velvet-rose); font-weight:700; margin-bottom:10px;">
+            Masoom Begum's Crown Shines Brighter Than the Stars! 👑💖
+          </p>
+          <button class="btn-imperial" id="btnToChapter7">Gaze Into the Royal Mirror 🪞</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         CHAPTER SEVEN (7 - NEW): THE ROYAL MIRROR OF ADMIRATION
+         ======================================================================= -->
+    <section class="chapter-view" id="scene7" aria-label="Chapter 7: The Royal Mirror of Admiration">
+      <div class="chapter-banner">
+        <span class="eyebrow-script">Chapter VII — Through Jaani's Eyes</span>
+        <h2 class="imperial-heading">The Enchanted Mirror of Admiration</h2>
+        <p class="imperial-sub">Tap the mirror to see what Your Jaani sees every time he looks at You, my Sweet Soul</p>
+      </div>
+
+      <div class="magic-mirror-frame">
+        <div style="font-size:1.6rem;">👑🪞✨</div>
+        <div class="mirror-reflection-glass" id="mirrorGlassBox">
+          <p id="mirrorReflectionQuote" style="font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:600; line-height:1.6; color:var(--deep-amethyst);">
+            "Mirror, mirror on the wall, who is the purest soul of all?"
+          </p>
+          <span id="mirrorReflectionSub" style="font-size:0.82rem; color:var(--velvet-rose); font-weight:700; margin-top:8px;">
+            (Tap the button below to reveal the reflection)
+          </span>
+        </div>
+
+        <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
+          <button class="btn-gold-pill" id="btnRevealMirror">Look Into the Mirror ✨</button>
+          <button class="btn-imperial" id="btnToChapter8" style="display:none;">Join the Moonlit Rose Tea Party 🫖</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         CHAPTER EIGHT (8 - NEW): THE ROYAL ROSE GARDEN TEA PARTY
+         ======================================================================= -->
+    <section class="chapter-view" id="scene8" aria-label="Chapter 8: The Royal Rose Garden Tea Party">
+      <div class="chapter-banner">
+        <span class="eyebrow-script">Chapter VIII — A Sweet Royal Picnic</span>
+        <h2 class="imperial-heading">Tea &amp; Macarons for my Jaan</h2>
+        <p class="imperial-sub">Your Jaani has prepared a cozy evening tea table in the palace garden. Serve a treat to see their reaction!</p>
+      </div>
+
+      <div class="tea-party-card">
+        <svg class="stage-svg" viewBox="0 0 580 230" style="max-height:220px;">
+          <ellipse cx="290" cy="214" rx="220" ry="14" fill="rgba(255, 214, 229, 0.2)"/>
+          <!-- Dudu & Bubu Seated at Royal Tea Table -->
+          <g transform="translate(185, 206)">
+            <g id="teaDuduAction"><g class="gentle-bob-dudu"><use href="#princeDudu"/></g></g>
+          </g>
+          <g transform="translate(395, 206)">
+            <g id="teaBubuAction">
+              <g class="gentle-bob-bubu">
+                <use href="#princessBubuBase"/>
+                <g transform="translate(0, -156) scale(0.82)"><use href="#goldenCrownGraphic"/></g>
+              </g>
+            </g>
+          </g>
+          <!-- Ornate Golden Tea Table in Center with Interactive Treat Props -->
+          <g transform="translate(290, 175)">
+            <rect x="-4" y="0" width="8" height="36" fill="#d4a359"/>
+            <ellipse cx="0" cy="36" rx="26" ry="6" fill="#ffd166"/>
+            <ellipse cx="0" cy="0" rx="56" ry="12" fill="#fffdf8" stroke="#d4a359" stroke-width="2.5"/>
+            <!-- Rose Teapot -->
+            <g id="teaPotProp">
+              <circle cx="-22" cy="-10" r="9.5" fill="#ff7597" stroke="#4a2c20" stroke-width="2"/>
+              <path d="M -31,-11 Q -38,-14 -35,-6" fill="none" stroke="#4a2c20" stroke-width="2"/>
+            </g>
+            <!-- Strawberry Macaron -->
+            <g id="macaronProp">
+              <rect x="-4" y="-11" width="14" height="5" rx="2.5" fill="#ff85a1" stroke="#4a2c20" stroke-width="1.6"/>
+              <rect x="-3" y="-6" width="12" height="3" rx="1.5" fill="#fff6e5"/>
+              <rect x="-4" y="-3" width="14" height="5" rx="2.5" fill="#ff85a1" stroke="#4a2c20" stroke-width="1.6"/>
+            </g>
+            <!-- Honey Heart Tart -->
+            <g id="honeyTartProp">
+              <circle cx="24" cy="-6" r="8" fill="#ffd166" stroke="#4a2c20" stroke-width="1.8"/>
+              <path d="M24,-9 C21,-13 17,-11 17,-7 C17,-4 24,0 24,2 C24,0 31,-4 31,-7 C31,-11 27,-13 24,-9 Z" fill="#d83a56"/>
+            </g>
+          </g>
+        </svg>
+
+        <div class="tea-treats-row">
+          <button type="button" class="treat-btn" data-msg="Prince pours warm rose-petal tea for his favorite Princess! 🫖🌹">🫖 Pour Rose Tea</button>
+          <button type="button" class="treat-btn" data-msg="Princess takes a bite of a strawberry macaron and smiles the sweetest smile! 🍓✨">🧁 Strawberry Macaron</button>
+          <button type="button" class="treat-btn" data-msg="A golden honey heart tart shared between Masoom & Pagal! 🍯💛">💛 Honey Heart Tart</button>
+        </div>
+
+        <p id="teaPartyToast" style="font-family:'Playfair Display',serif; font-style:italic; font-size:1.05rem; color:#ffd166; min-height:28px; margin-bottom:14px;">
+          Choose a royal treat from the table above...
+        </p>
+
+        <button class="btn-imperial" id="btnToChapter9">Enter the Starlit Ballroom 💃</button>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         CHAPTER NINE (9): A DANCE WITH MY PRINCESS
+         ======================================================================= -->
+    <section class="chapter-view" id="scene9" aria-label="Chapter 9: A Dance With My Princess">
+      <div class="chapter-banner">
+        <span class="eyebrow-script">Chapter IX — The Royal Waltz</span>
+        <h2 class="imperial-heading">A Dance With My Princess</h2>
+      </div>
+
+      <div class="ballroom-hall-card" id="ballroomCard">
+        <svg class="stage-svg" viewBox="0 0 580 255" style="max-height:245px;">
+          <!-- Golden Chandeliers -->
+          <g transform="translate(150, 0)">
+            <line x1="0" y1="0" x2="0" y2="24" stroke="#d4a359" stroke-width="2.5"/>
+            <path d="M -28,24 Q 0,38 28,24" fill="none" stroke="#ffd166" stroke-width="3"/>
+            <circle cx="-24" cy="20" r="4" fill="#fff3b0"/>
+            <circle cx="0" cy="28" r="4.5" fill="#fff3b0"/>
+            <circle cx="24" cy="20" r="4" fill="#fff3b0"/>
+          </g>
+          <g transform="translate(430, 0)">
+            <line x1="0" y1="0" x2="0" y2="24" stroke="#d4a359" stroke-width="2.5"/>
+            <path d="M -28,24 Q 0,38 28,24" fill="none" stroke="#ffd166" stroke-width="3"/>
+            <circle cx="-24" cy="20" r="4" fill="#fff3b0"/>
+            <circle cx="0" cy="28" r="4.5" fill="#fff3b0"/>
+            <circle cx="24" cy="20" r="4" fill="#fff3b0"/>
+          </g>
+
+          <ellipse cx="290" cy="232" rx="235" ry="18" fill="rgba(212, 163, 89, 0.25)" stroke="#d4a359" stroke-width="1.5"/>
+          <g transform="translate(95, 224)"><use href="#pinkRoseGraphic"/></g>
+          <g transform="translate(485, 224)"><use href="#pinkRoseGraphic"/></g>
+
+          <g id="ballroomDancePair">
+            <g transform="translate(215, 224)">
+              <g id="ch9DuduInner"><use href="#princeDudu"/></g>
+            </g>
+            <g transform="translate(365, 224)">
+              <g id="ch9BubuInner">
+                <use href="#princessBubuBase"/>
+                <g transform="translate(4, -152) scale(0.85)"><use href="#goldenCrownGraphic"/></g>
+              </g>
+            </g>
+          </g>
+        </svg>
+
+        <p id="ballroomPromptText" style="font-family:'Playfair Display',serif; font-size:1.22rem; color:var(--deep-amethyst); font-weight:700; margin: 6px 0 12px;">
+          "May I have this dance, Your Highness?"
+        </p>
+
+        <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+          <button class="btn-imperial" id="btnAcceptDance">Accept Pagal's Hand 💗</button>
+          <button class="btn-imperial" id="btnToChapter10" style="display:none;">Open Your Prince's Letter 💌</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         CHAPTER TEN (10): A LETTER FROM YOUR PRINCE
+         ======================================================================= -->
+    <section class="chapter-view" id="scene10" aria-label="Chapter 10: A Letter From Your Prince">
+      <div class="chapter-banner">
+        <span class="eyebrow-script">Chapter X — Straight From Dudu's Heart</span>
+        <h2 class="imperial-heading">To My Beautiful Princess Ammara Zain</h2>
+      </div>
+
+      <article class="prince-letter-card">
+        <div id="princeTypewriterContainer"></div>
+        <div style="text-align:center;">
+          <div class="imperial-seal-badge" id="princeRoyalSeal">
+            <span>👑</span>
+            <span>SEALED WITH LOVE — AMMARA ❤️ ZAIN</span>
+          </div>
+        </div>
+      </article>
+
+      <div style="margin-top:16px;">
+        <button class="btn-imperial" id="btnToChapter11">Step Into Our Starlit Finale 🌙</button>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         FINAL CHAPTER (11): FOREVER MY PRINCESS
+         ======================================================================= -->
+    <section class="chapter-view" id="scene11" aria-label="Final Chapter: Forever My Princess">
+      <div class="chapter-banner">
+        <span class="eyebrow-script">The Happily Ever After</span>
+        <h2 class="imperial-heading">Every Fairytale Has a Princess.<br>Mine Has You.</h2>
+      </div>
+
+      <div class="finale-night-box" id="nightKingdomCard">
+        <svg class="stage-svg" viewBox="0 0 600 250" style="max-height:240px;">
+          <circle cx="490" cy="54" r="32" fill="#fff3b0" opacity="0.92"/>
+          <circle cx="490" cy="54" r="44" fill="#ffe599" opacity="0.22"/>
+
+          <g id="finaleConstellation" transform="translate(300, 48)">
+            <path d="M 0,-10 C -12,-28 -38,-18 -38,2 C -38,22 -8,34 0,42 C 8,34 38,22 38,2 C 38,-18 12,-28 0,-10 Z"
+                  fill="none" stroke="#ffd166" stroke-width="1.8" stroke-dasharray="4 4"/>
+            <circle cx="0" cy="-10" r="3" fill="#fff"/>
+            <circle cx="-38" cy="2" r="3" fill="#ffd166"/>
+            <circle cx="38" cy="2" r="3" fill="#ffd166"/>
+            <circle cx="0" cy="42" r="3.5" fill="#fff"/>
+          </g>
+
+          <g opacity="0.45">
+            <rect x="200" y="105" width="200" height="120" fill="#4a2c5e"/>
+            <polygon points="195,105 300,52 405,105" fill="#6b3b7c"/>
+            <rect x="165" y="125" width="35" height="100" fill="#3d224f"/>
+            <polygon points="160,125 182,88 205,125" fill="#5c316c"/>
+            <rect x="400" y="125" width="35" height="100" fill="#3d224f"/>
+            <polygon points="395,125 417,88 440,125" fill="#5c316c"/>
+          </g>
+
+          <ellipse cx="300" cy="232" rx="230" ry="15" fill="rgba(255, 182, 198, 0.22)"/>
+          <g transform="translate(125, 224)"><use href="#pinkRoseGraphic"/></g>
+          <g transform="translate(475, 224)"><use href="#pinkRoseGraphic"/></g>
+
+          <g transform="translate(230, 224)">
+            <g id="ch10DuduInner"><use href="#princeDudu"/></g>
+          </g>
+          <g transform="translate(370, 224)">
+            <g id="ch10BubuInner">
+              <use href="#princessBubuBase"/>
+              <g transform="translate(4, -152) scale(0.85)"><use href="#goldenCrownGraphic"/></g>
+            </g>
+          </g>
+        </svg>
+
+        <article class="final-scroll-box" id="finalProclamationCard">
+          <h3 style="font-family:'Playfair Display',serif; font-size:1.45rem; color:var(--velvet-rose); margin-bottom:12px;">
+            Happy Princess Day, My Love! 👑❤️
+          </h3>
+          <p style="margin-bottom:10px;">
+              You don't need a fairytale to be magical. <br>
+            You don't need a kingdom to be royalty.<br>
+            You don't need a crown to be special.
+          </p>
+          <p style="margin-bottom:8px;">
+            Because You are already all of those things in the world of Your Pagal Shohar.
+          </p>
+          <p style="margin-bottom:14px;">
+            No matter how many chapters life writes, I hope we keep creating beautiful memories together.
+          </p>
+          <p style="font-family:'Caveat',cursive; font-size:1.55rem; color:var(--velvet-rose);">
+            Always and Forever Yours,<br>
+            My Sweet Princess Begum, my Wonderful Partner! 🧸💗
+          </p>
+
+          <div style="margin-top:18px;">
+            <button class="btn-imperial" id="btnReplayFairytale">Replay Our Fairytale ↻</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Treasure Modal -->
+  <div class="modal-backdrop" id="treasureModalOverlay" role="dialog" aria-modal="true" aria-labelledby="treasureModalTitle">
+    <div class="modal-card">
+      <div id="treasureModalIcon" style="font-size:2.8rem; margin-bottom:8px;">💖</div>
+      <h3 id="treasureModalTitle" style="font-family:'Playfair Display',serif; font-size:1.45rem; color:var(--velvet-rose); margin-bottom:10px;">
+        Treasure Title
+      </h3>
+      <p id="treasureModalBody" style="font-size:0.96rem; line-height:1.68; margin-bottom:18px;">
+        Treasure message
+      </p>
+      <button class="btn-imperial" id="btnCloseTreasureModal" style="padding:9px 24px; font-size:0.9rem;">Keep in Royal Chest ✨</button>
+    </div>
+  </div>
+
+  <!-- Fullscreen Sparkle & Heart Canvas -->
+  <canvas id="fairytaleParticles"></canvas>
+
+  <script>
+    /* =========================================================================
+       1. FAIRYTALE DATA
+       ========================================================================= */
+    const ROYAL_TRAITS = [
+      { title: "YOUR SMILE", icon: "🌸", message: "Your smile has a way of making even my ordinary days feel like something special." },
+      { title: "YOUR HEART", icon: "💗", message: "Your heart is one of the most precious things in my world. I hope You always know how deeply it is loved." },
+      { title: "YOUR BEAUTY", icon: "✨", message: "To me, You are beautiful in ways that words could never completely explain." },
+      { title: "YOUR PRESENCE", icon: "🦋", message: "You make my world feel warmer, softer, and a more magical just by being in it." },
+      { title: "YOUR STRENGTH", icon: "👑", message: "My Koh-i-Noor, I admire the person You are. Even on difficult days, You deserve to feel loved, appreciated, and celebrated." },
+      { title: "YOUR PLACE IN MY HEART", icon: "🏰", message: "No crown, castle, or kingdom could ever be more precious to me than the place You hold in my heart." }
+    ];
+
+    const ROYAL_PROMISES = [
+        "I promise to celebrate Your happiness and support You through Your difficult moments.",
+      "I promise to keep reminding You how special You are, even on the days You forget it Yourself.",
+      "I promise to keep making memories with You, finding reasons to laugh, and creating little moments worth remembering.",
+      "I promise to be someone with whom Your heart never has to pretend. You can be completely yourself with me, knowing that every version of You is precious to me.",
+      "I promise to protect the beautiful bond we share, never taking Your love for granted, and choosing You with the same sincerity in ordinary days as in Our most special moments.",
+      "I promise to love You for who You are, not for who the world expects You to be. You never have to be flawless to be my Girl; to me, You are already more than enough."
+    ];
+
+    const ROYAL_TREASURES = [
+      { icon: "❤️", name: "My Love", detail: "A heart that beats with warmth, patience, and devotion for You every single day, my Begum." },
+      { icon: "🌹", name: "My Admiration", detail: "A blooming pink rose for the grace, kindness, and beauty You carry wherever You go." },
+      { icon: "💎", name: "My Trust", detail: "Clear, steady, and sincere — my trust in You and in the bond we nurture together." },
+      { icon: "⭐", name: "My Hopes for Us", detail: "A wishing star for all the laughter, dreams, and chapters still waiting ahead of Us." },
+      { icon: "🧸", name: "Our Cuteness", detail: "Every silly joke, sweet nickname, and the moments that make Us smile." },
+      { icon: "🗝️", name: "The Key to My Heart", detail: "It has always belonged to You, Princess Ammara Zain, no one else holds a place like Yours." }
+    ];
+
+    const MIRROR_REFLECTIONS = [
+      {
+        quote: "“In this mirror stands the Girl whose kindness turns my ordinary days into a fairytale.”",
+        sub: "Reflection I — Purest Heart in the Kingdom 💖"
+      },
+      {
+        quote: "“She doesn't need a golden tiara to shine; Her gentle soul and warm smile crown Her every single day.”",
+        sub: "Reflection II — Natural Grace & Beauty 👑"
+      },
+      {
+        quote: "“To the Protector, She is not just a Princess, She is his Safe Space, his Peace, his Smile, and his Heartbeat.”",
+        sub: "Reflection III — Forever Loved and Protected by Zain 🧸"
+      }
+    ];
+
+    const PRINCE_LETTER_PARAGRAPHS = [
+        "My Dearest Begum Jaan,",
+        "First of all, meri Jaan ke Tukray, please forgive Your Ganda Shohar for being a little late in wishing his beautiful Princess. You deserve to be celebrated right on time, with all the love in the world, and I am really sorry that these wishes are arriving a little late. But please know that being late with my wishes could never mean that You are any less special to me. You deserve to feel like a Princess every single day, not just on Princess Day...",
+        "Happy Princess Day, my Khubsurat Begum, my Masoomest, my Cinderella, my Peace, my Heartbeat!",
+      "Today, I wish I could take You into a little kingdom of Our own, where every morning begins with Your smile, where the gardens bloom just to make You happy, and where every star in the sky shines to remind You how precious You are to me.",
+      "If I could, I would fill that kingdom with everything You love, place the most beautiful crown upon Your head, and make sure You never forget just how special You are. I would want every little corner of that world to whisper one thing to You: You are loved beyond words.",
+      "I know I cannot offer You a real castle, a royal carriage, or a thousand diamonds, but I wish I could give You something even more meaningful; a heart that always makes room for You, arms that are always waiting to hold You, and the lips that always search for You to give a romantic kiss.",
+      "I wish to give You flowers and gajray on all of the special days, make You smile when You least expect it, turn little moments into beautiful memories, and remind You that You are loved and appreciated all the time. You are enough simply by being You, meri Masoom Zindagi...",
+      "And whenever You look into the mirror, I hope You see even a little of what I see inside You: a Beautiful Soul, a Caring Heart, a Kindred Spirit. I wish You could ever see Yourself through my eyes, even for a moment, because then You would understand why I call You my Princess with all my heart.",
+      "Never forget this, my Deep Heart: You are not special because it is Princess Day. Today is special because it gives me another reason to celebrate You. You deserve all the flowers, all the affection, all the happiness, and all the beautiful things this world has to offer.",
+      "And if I ever get to write a thousand fairytales, I would still choose You as the princess in every single one.",
+      "With all the love my heart can hold,",
+      "Your Love, who is forever grateful to have You in his life 🧸❤️👑"
+    ];
+
+    /* =========================================================================
+       2. WEB AUDIO API MUSIC BOX & SOUND EFFECTS
+       ========================================================================= */
+    let audioCtx = null;
+    let sfxEnabled = true;
+    let musicEnabled = false;
+    let musicLoopTimer = null;
+
+    const btnToggleMusic = document.getElementById("btnToggleMusic");
+    const btnToggleSfx = document.getElementById("btnToggleSfx");
+
+    function initAudio() {
+      if (!audioCtx) {
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (AC) audioCtx = new AC();
+      }
+      if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+    }
+
+    function playNote(freq, delay, duration, type = "sine", volume = 0.08) {
+      if (!audioCtx) return;
+      try {
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, now + delay);
+        gain.gain.setValueAtTime(0.0001, now + delay);
+        gain.gain.linearRampToValueAtTime(volume, now + delay + 0.03);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + delay + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now + delay);
+        osc.stop(now + delay + duration + 0.05);
+      } catch (e) {}
+    }
+
+    function playSfx(type) {
+      if (!sfxEnabled) return;
+      initAudio();
+      if (type === "chime") {
+        [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => playNote(f, i * 0.1, 0.5, "triangle", 0.09));
+      } else if (type === "sparkle") {
+        playNote(880, 0, 0.22, "sine", 0.07);
+        playNote(1174.66, 0.08, 0.3, "sine", 0.07);
+      } else if (type === "collect") {
+        playNote(659.25, 0, 0.14, "sine", 0.09);
+        playNote(987.77, 0.07, 0.2, "triangle", 0.09);
+      } else if (type === "cloud") {
+        playNote(260, 0, 0.16, "sine", 0.07);
+      }
+    }
+
+    const WALTZ_MELODY = [
+      523.25, 659.25, 783.99, 659.25,
+      587.33, 698.46, 880.00, 698.46,
+      523.25, 659.25, 783.99, 1046.50,
+      987.77, 783.99, 659.25, 587.33
+    ];
+    let melodyStep = 0;
+
+    function startBackgroundMusic() {
+      initAudio();
+      if (musicLoopTimer) clearInterval(musicLoopTimer);
+      musicEnabled = true;
+      btnToggleMusic.classList.remove("muted");
+      musicLoopTimer = setInterval(() => {
+        if (!musicEnabled) return;
+        const freq = WALTZ_MELODY[melodyStep % WALTZ_MELODY.length];
+        playNote(freq, 0, 0.65, "sine", 0.042);
+        melodyStep++;
+      }, 520);
+    }
+
+    function stopBackgroundMusic() {
+      musicEnabled = false;
+      btnToggleMusic.classList.add("muted");
+      if (musicLoopTimer) { clearInterval(musicLoopTimer); musicLoopTimer = null; }
+    }
+
+    btnToggleMusic.addEventListener("click", () => {
+      if (musicEnabled) stopBackgroundMusic();
+      else startBackgroundMusic();
+    });
+
+    btnToggleSfx.addEventListener("click", () => {
+      sfxEnabled = !sfxEnabled;
+      btnToggleSfx.classList.toggle("muted", !sfxEnabled);
+      if (sfxEnabled) playSfx("sparkle");
+    });
+
+    /* =========================================================================
+       3. PARTICLE ENGINE
+       ========================================================================= */
+    const pCanvas = document.getElementById("fairytaleParticles");
+    const pCtx = pCanvas.getContext("2d");
+    let cw = (pCanvas.width = window.innerWidth);
+    let ch = (pCanvas.height = window.innerHeight);
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    window.addEventListener("resize", () => {
+      cw = pCanvas.width = window.innerWidth;
+      ch = pCanvas.height = window.innerHeight;
+    });
+
+    const COLORS = ["#ff7597", "#c93b64", "#ffd166", "#e0aaff", "#f3d5ff", "#ff4d6d"];
+    const floatingAmbient = [];
+    const burstSparks = [];
+
+    for (let i = 0; i < (reducedMotion ? 8 : 18); i++) {
+      floatingAmbient.push({
+        x: Math.random() * cw,
+        y: Math.random() * ch,
+        size: Math.random() * 4.5 + 3.5,
+        vy: -(Math.random() * 0.4 + 0.2),
+        vx: (Math.random() - 0.5) * 0.28,
+        angle: Math.random() * Math.PI * 2,
+        spin: (Math.random() - 0.5) * 0.02,
+        color: COLORS[Math.floor(Math.random() * COLORS.length)],
+        alpha: Math.random() * 0.3 + 0.18,
+        type: i % 2 === 0 ? "heart" : "star"
+      });
+    }
+
+    function drawMotif(ctx, x, y, size, angle, color, alpha, type) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(angle);
+      ctx.fillStyle = color;
+      ctx.globalAlpha = Math.max(0, alpha);
+
+      if (type === "heart") {
+        ctx.beginPath();
+        ctx.moveTo(0, -size * 0.3);
+        ctx.bezierCurveTo(-size * 0.6, -size, -size * 1.2, -size * 0.1, 0, size * 0.9);
+        ctx.bezierCurveTo(size * 1.2, -size * 0.1, size * 0.6, -size, 0, -size * 0.3);
+        ctx.fill();
+      } else {
+        ctx.beginPath();
+        for (let i = 0; i < 5; i++) {
+          ctx.lineTo(Math.cos(((18 + i * 72) * Math.PI) / 180) * size, Math.sin(((18 + i * 72) * Math.PI) / 180) * size);
+          ctx.lineTo(Math.cos(((54 + i * 72) * Math.PI) / 180) * (size * 0.45), Math.sin(((54 + i * 72) * Math.PI) / 180) * (size * 0.45));
+        }
+        ctx.closePath();
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+
+    function emitMagicBurst(x = cw / 2, y = ch * 0.45, count = 42) {
+      const n = reducedMotion ? Math.min(12, count) : count;
+      for (let i = 0; i < n; i++) {
+        const ang = (Math.PI * 2 * i) / n + (Math.random() - 0.5) * 0.3;
+        const spd = Math.random() * 5.8 + 2.2;
+        burstSparks.push({
+          x, y,
+          vx: Math.cos(ang) * spd,
+          vy: Math.sin(ang) * spd - 2,
+          grav: 0.12,
+          size: Math.random() * 6 + 4,
+          angle: Math.random() * Math.PI,
+          spin: (Math.random() - 0.5) * 0.1,
+          color: COLORS[Math.floor(Math.random() * COLORS.length)],
+          alpha: 1,
+          type: i % 2 === 0 ? "heart" : "star"
+        });
+      }
+    }
+
+    function animateGlobalCanvas() {
+      pCtx.clearRect(0, 0, cw, ch);
+      for (const a of floatingAmbient) {
+        a.x += a.vx + Math.sin(a.y * 0.02) * 0.25;
+        a.y += a.vy;
+        a.angle += a.spin;
+        if (a.y < -20) { a.y = ch + 20; a.x = Math.random() * cw; }
+        drawMotif(pCtx, a.x, a.y, a.size, a.angle, a.color, a.alpha, a.type);
+      }
+      for (let i = burstSparks.length - 1; i >= 0; i--) {
+        const b = burstSparks[i];
+        b.x += b.vx;
+        b.y += b.vy;
+        b.vy += b.grav;
+        b.vx *= 0.985;
+        b.angle += b.spin;
+        b.alpha -= 0.013;
+        if (b.alpha <= 0 || b.y > ch + 40) burstSparks.splice(i, 1);
+        else drawMotif(pCtx, b.x, b.y, b.size, b.angle, b.color, b.alpha, b.type);
+      }
+      requestAnimationFrame(animateGlobalCanvas);
+    }
+    requestAnimationFrame(animateGlobalCanvas);
+
+    /* =========================================================================
+       4. SCENE NAVIGATION & PROGRESS TRAIL (11 Total Chapters)
+       ========================================================================= */
+    const SCENE_LABELS = [
+      "Royal Invitation",
+      "Chapter 1 of 11",
+      "Chapter 2 of 11",
+      "Chapter 3 of 11",
+      "Chapter 4 of 11",
+      "Chapter 5 of 11",
+      "Chapter 6 of 11",
+      "Chapter 7 of 11",
+      "Chapter 8 of 11",
+      "Chapter 9 of 11",
+      "Chapter 10 of 11",
+      "Finale • Forever"
+    ];
+    let currentScene = 0;
+    let sceneTimers = [];
+
+    const journeyTrailBar = document.getElementById("journeyTrailBar");
+    SCENE_LABELS.forEach((_, idx) => {
+      const gem = document.createElement("span");
+      gem.className = "trail-gem" + (idx === 0 ? " active" : "");
+      journeyTrailBar.appendChild(gem);
+    });
+
+    function clearSceneTimers() {
+      sceneTimers.forEach(t => clearTimeout(t));
+      sceneTimers = [];
+    }
+
+    function switchScene(targetIdx) {
+      clearSceneTimers();
+      const oldEl = document.getElementById(`scene${currentScene}`);
+      const newEl = document.getElementById(`scene${targetIdx}`);
+      if (!newEl) return;
+
+      if (oldEl && oldEl !== newEl) {
+        oldEl.classList.remove("visible");
+        setTimeout(() => {
+          oldEl.classList.remove("active");
+          activateScene(targetIdx, newEl);
+        }, 400);
+      } else {
+        activateScene(targetIdx, newEl);
+      }
+    }
+
+    function activateScene(idx, el) {
+      currentScene = idx;
+      document.body.setAttribute("data-scene", String(idx));
+      document.getElementById("sceneProgressLabel").textContent = SCENE_LABELS[idx];
+
+      document.querySelectorAll(".trail-gem").forEach((g, i) => {
+        g.classList.toggle("active", i === idx);
+        g.classList.toggle("done", i < idx);
+      });
+
+      el.classList.add("active");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add("visible")));
+
+      if (idx === 6) initTiaraCatchGame();
+      if (idx === 10) startPrinceLetterTypewriter();
+      if (idx === 11) startFinaleSequence();
+    }
+
+    /* =========================================================================
+       5. OPENING & CHAPTERS 1-5 INTERACTIONS
+       ========================================================================= */
+    document.getElementById("btnOpenInvitation").addEventListener("click", () => {
+      playSfx("chime");
+      emitMagicBurst(cw / 2, ch * 0.42, 48);
+      const env = document.getElementById("royalEnvelopeBox");
+      const inv = document.getElementById("invitationScrollCard");
+      env.classList.add("opened");
+      setTimeout(() => {
+        env.style.display = "none";
+        inv.style.display = "block";
+        requestAnimationFrame(() => inv.classList.add("revealed"));
+      }, 480);
+    });
+
+    document.getElementById("btnEnterKingdom").addEventListener("click", () => {
+      playSfx("chime");
+      emitMagicBurst(cw / 2, ch * 0.45, 45);
+      switchScene(1);
+    });
+
+    // Chapter 1: Crown Placement
+    const btnPlaceCrown = document.getElementById("btnPlaceCrown");
+    const btnToChapter2 = document.getElementById("btnToChapter2");
+    const ch1KingdomStage = document.getElementById("ch1KingdomStage");
+
+    btnPlaceCrown.addEventListener("click", () => {
+      playSfx("chime");
+      emitMagicBurst(cw / 2, ch * 0.35, 55);
+      ch1KingdomStage.classList.remove("ch1-kneeling");
+      ch1KingdomStage.classList.add("crown-placed");
+      btnPlaceCrown.style.display = "none";
+      btnToChapter2.style.display = "inline-flex";
+    });
+    btnToChapter2.addEventListener("click", () => { playSfx("sparkle"); switchScene(2); });
+
+    // Chapter 2: Royal Virtues
+    const royalTraitsGrid = document.getElementById("royalTraitsGrid");
+    ROYAL_TRAITS.forEach(item => {
+      const card = document.createElement("button");
+      card.type = "button";
+      card.className = "virtue-card";
+      card.innerHTML = `
+        <div class="virtue-crest">${item.icon}</div>
+        <h3 class="virtue-title">${item.title}</h3>
+        <span class="virtue-hint">Tap to reveal ✨</span>
+        <p class="virtue-text">${item.message}</p>
+      `;
+      card.addEventListener("click", () => {
+        if (!card.classList.contains("revealed")) {
+          card.classList.add("revealed");
+          playSfx("sparkle");
+          const r = card.getBoundingClientRect();
+          emitMagicBurst(r.left + r.width / 2, r.top + r.height / 2, 16);
+        }
+      });
+      royalTraitsGrid.appendChild(card);
+    });
+    document.getElementById("btnToChapter3").addEventListener("click", () => { playSfx("chime"); switchScene(3); });
+
+    // Chapter 3: Six Promises
+    const openedPromises = new Set();
+    const royalPromisesGrid = document.getElementById("royalPromisesGrid");
+    const promisesCounterText = document.getElementById("promisesCounterText");
+    const promisesSignedBanner = document.getElementById("promisesSignedBanner");
+
+    ROYAL_PROMISES.forEach((text, idx) => {
+      const card = document.createElement("button");
+      card.type = "button";
+      card.className = "promise-card";
+      card.innerHTML = `
+        <div class="gold-seal-badge">#${idx + 1}</div>
+        <div>
+          <strong style="color:var(--deep-amethyst);">Royal Promise ${idx + 1}</strong><br>
+          <span class="p-hint" style="font-style:italic; color:var(--text-soft); font-size:0.84rem;">Tap golden seal to unroll...</span>
+          <span class="p-full" style="display:none; font-size:0.9rem; line-height:1.52;">${text}</span>
+        </div>
+      `;
+      card.addEventListener("click", () => {
+        if (!card.classList.contains("opened")) {
+          card.classList.add("opened");
+          card.querySelector(".p-hint").style.display = "none";
+          card.querySelector(".p-full").style.display = "inline";
+          openedPromises.add(idx);
+          playSfx("sparkle");
+          promisesCounterText.textContent = `Tap each golden seal to unroll your promise (${openedPromises.size} / 6 opened)`;
+          if (openedPromises.size === ROYAL_PROMISES.length) {
+            promisesSignedBanner.style.display = "block";
+            emitMagicBurst(cw / 2, ch * 0.5, 45);
+          }
+        }
+      });
+      royalPromisesGrid.appendChild(card);
+    });
+    document.getElementById("btnToChapter4").addEventListener("click", () => { playSfx("chime"); switchScene(4); });
+
+    // Chapter 4 (NEW): Starlight Carriage Wishes (Moves from left end to right end across the 3 wishes)
+    const carriageWishDisplay = document.getElementById("carriageWishDisplay");
+    const royalCarriageTrack = document.getElementById("royalCarriageTrack");
+    const litWishes = new Set();
+    document.querySelectorAll(".wish-star-pill").forEach((btn, idx) => {
+      btn.addEventListener("click", () => {
+        btn.classList.add("lit");
+        litWishes.add(idx);
+        playSfx("sparkle");
+        const r = btn.getBoundingClientRect();
+        emitMagicBurst(r.left + r.width / 2, r.top, 22);
+        carriageWishDisplay.textContent = btn.dataset.wish;
+
+        // Progress across the sky: 1 wish = +125px, 2 wishes = +250px, all 3 wishes = +370px (right end!)
+        const stepOffsets = [0, 125, 250, 370];
+        const targetX = stepOffsets[Math.min(3, litWishes.size)];
+        const arcY = litWishes.size === 2 ? -14 : litWishes.size === 3 ? -6 : -8;
+        royalCarriageTrack.style.transform = `translate(${targetX}px, ${arcY}px)`;
+      });
+    });
+    document.getElementById("btnToChapter5").addEventListener("click", () => { playSfx("chime"); switchScene(5); });
+
+    // Chapter 5: Royal Treasure Room
+    const treasuresGrid = document.getElementById("treasuresGrid");
+    const treasureModalOverlay = document.getElementById("treasureModalOverlay");
+    ROYAL_TREASURES.forEach(t => {
+      const item = document.createElement("button");
+      item.type = "button";
+      item.className = "treasure-pedestal-btn";
+      item.innerHTML = `
+        <div style="font-size:2.1rem; margin-bottom:6px;">${t.icon}</div>
+        <div style="font-family:'Playfair Display',serif; font-weight:700; font-size:0.95rem; color:var(--deep-amethyst);">${t.name}</div>
+      `;
+      item.addEventListener("click", () => {
+        item.classList.add("opened");
+        playSfx("sparkle");
+        document.getElementById("treasureModalIcon").textContent = t.icon;
+        document.getElementById("treasureModalTitle").textContent = t.name;
+        document.getElementById("treasureModalBody").textContent = t.detail;
+        treasureModalOverlay.classList.add("active");
+        requestAnimationFrame(() => treasureModalOverlay.classList.add("visible"));
+      });
+      treasuresGrid.appendChild(item);
+    });
+
+    function closeTreasureModal() {
+      treasureModalOverlay.classList.remove("visible");
+      setTimeout(() => treasureModalOverlay.classList.remove("active"), 260);
+    }
+    document.getElementById("btnCloseTreasureModal").addEventListener("click", closeTreasureModal);
+    treasureModalOverlay.addEventListener("click", e => { if (e.target === treasureModalOverlay) closeTreasureModal(); });
+    document.getElementById("btnToChapter6").addEventListener("click", () => { playSfx("chime"); switchScene(6); });
+
+    /* =========================================================================
+       6. CHAPTER 6 (NEW GAME): CATCH FALLING STARLIGHT & PETALS FOR BUBU'S TIARA
+       ========================================================================= */
+    const tCanvas = document.getElementById("tiaraCatchCanvas");
+    const tCtx = tCanvas.getContext("2d");
+    const tiaraMeterLabel = document.getElementById("tiaraMeterLabel");
+    const tiaraComboLabel = document.getElementById("tiaraComboLabel");
+    const tiaraProgressFill = document.getElementById("tiaraProgressFill");
+    const tiaraGameWinPanel = document.getElementById("tiaraGameWinPanel");
+
+    let catchGameActive = false;
+    let catchGameWon = false;
+    let catchRaf = null;
+    let tiaraCharge = 0;
+    let comboStreak = 1;
+    let spawnCooldown = 0;
+    let fallingObjects = [];
+    let floatingPopups = [];
+    const catcherDudu = { x: 320, y: 252, vx: 0, speed: 6.5 };
+    const moveState = { left: false, right: false };
+
+    function initTiaraCatchGame() {
+      if (catchRaf) cancelAnimationFrame(catchRaf);
+      tiaraCharge = 0;
+      comboStreak = 1;
+      catchGameWon = false;
+      catchGameActive = true;
+      catcherDudu.x = tCanvas.width / 2;
+      fallingObjects = [];
+      floatingPopups = [];
+      tiaraGameWinPanel.style.display = "none";
+      updateTiaraHud();
+      runTiaraCatchLoop();
+    }
+
+    function updateTiaraHud() {
+      const pct = Math.min(100, Math.round(tiaraCharge));
+      tiaraMeterLabel.textContent = `Magic: ${pct}% ✨`;
+      tiaraComboLabel.textContent = `Combo: ${comboStreak}x`;
+      tiaraProgressFill.style.width = `${pct}%`;
+    }
+
+    window.addEventListener("keydown", e => {
+      if (currentScene !== 6 || !catchGameActive) return;
+      if (e.key === "ArrowLeft" || e.key.toLowerCase() === "a") { e.preventDefault(); moveState.left = true; }
+      if (e.key === "ArrowRight" || e.key.toLowerCase() === "d") { e.preventDefault(); moveState.right = true; }
+    });
+    window.addEventListener("keyup", e => {
+      if (e.key === "ArrowLeft" || e.key.toLowerCase() === "a") moveState.left = false;
+      if (e.key === "ArrowRight" || e.key.toLowerCase() === "d") moveState.right = false;
+    });
+
+    const btnLeft = document.getElementById("btnMoveLeft");
+    const btnRight = document.getElementById("btnMoveRight");
+    btnLeft.addEventListener("pointerdown", e => { e.preventDefault(); moveState.left = true; });
+    btnLeft.addEventListener("pointerup", () => moveState.left = false);
+    btnLeft.addEventListener("pointerleave", () => moveState.left = false);
+    btnRight.addEventListener("pointerdown", e => { e.preventDefault(); moveState.right = true; });
+    btnRight.addEventListener("pointerup", () => moveState.right = false);
+    btnRight.addEventListener("pointerleave", () => moveState.right = false);
+
+    // Smooth mouse/touch drag directly across the balcony
+    tCanvas.addEventListener("pointermove", e => {
+      if (!catchGameActive || catchGameWon) return;
+      if (e.buttons > 0 || e.pointerType === "mouse") {
+        const rect = tCanvas.getBoundingClientRect();
+        const nx = (e.clientX - rect.left) * (tCanvas.width / rect.width);
+        catcherDudu.x = Math.max(44, Math.min(tCanvas.width - 44, nx));
+      }
+    });
+    tCanvas.addEventListener("pointerdown", e => {
+      if (!catchGameActive || catchGameWon) return;
+      const rect = tCanvas.getBoundingClientRect();
+      const nx = (e.clientX - rect.left) * (tCanvas.width / rect.width);
+      catcherDudu.x = Math.max(44, Math.min(tCanvas.width - 44, nx));
+    });
+
+    function spawnFallingSkyItem() {
+      const roll = Math.random();
+      let kind = "heart";
+      if (roll < 0.35) kind = "star";
+      else if (roll < 0.72) kind = "heart";
+      else if (roll < 0.86) kind = "crown";
+      else kind = "cloud";
+
+      fallingObjects.push({
+        x: 45 + Math.random() * (tCanvas.width - 90),
+        y: -24,
+        vy: 2.1 + Math.random() * 1.4,
+        kind,
+        wobble: Math.random() * Math.PI * 2
+      });
+    }
+
+    function drawCatcherDudu(ctx, x, y, won) {
+      ctx.save();
+      ctx.translate(x, y);
+      // Golden Basket / Velvet Cushion held above paws
+      ctx.fillStyle = "#ffd166";
+      ctx.strokeStyle = "#4a2c20";
+      ctx.lineWidth = 2.2;
+      ctx.beginPath();
+      ctx.ellipse(0, -28, 32, 9, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
+
+      // Dudu Head & Ears peeking behind basket
+      ctx.fillStyle = "#d3a17e";
+      ctx.beginPath();
+      ctx.arc(-18, -14, 7, 0, Math.PI * 2);
+      ctx.arc(18, -14, 7, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.ellipse(0, 2, 26, 20, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.fillStyle = "#f7b186";
+      ctx.beginPath();
+      ctx.ellipse(-16, 6, 5.5, 4, 0, 0, Math.PI * 2);
+      ctx.ellipse(16, 6, 5.5, 4, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = "#4a2c20";
+      ctx.beginPath();
+      ctx.arc(-10, 2, 2.6, 0, Math.PI * 2);
+      ctx.arc(10, 2, 2.6, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(0, 6, 4, 0, Math.PI);
+      ctx.stroke();
+
+      if (won) {
+        drawMotif(ctx, 0, -48, 14, 0, "#ffd166", 1, "star");
+      }
+      ctx.restore();
+    }
+
+    function runTiaraCatchLoop() {
+      if (currentScene !== 6) return;
+      tCtx.clearRect(0, 0, tCanvas.width, tCanvas.height);
+
+      // Palace balcony floor
+      tCtx.fillStyle = "rgba(255, 253, 248, 0.75)";
+      tCtx.fillRect(0, tCanvas.height - 26, tCanvas.width, 26);
+
+      if (!catchGameWon) {
+        if (moveState.left) catcherDudu.x -= catcherDudu.speed;
+        if (moveState.right) catcherDudu.x += catcherDudu.speed;
+        catcherDudu.x = Math.max(44, Math.min(tCanvas.width - 44, catcherDudu.x));
+
+        spawnCooldown--;
+        if (spawnCooldown <= 0) {
+          spawnFallingSkyItem();
+          spawnCooldown = 34;
+        }
+      }
+
+      for (let i = fallingObjects.length - 1; i >= 0; i--) {
+        const obj = fallingObjects[i];
+        obj.y += obj.vy;
+        obj.wobble += 0.05;
+        const drawX = obj.x + Math.sin(obj.wobble) * 8;
+
+        if (obj.kind === "star") {
+          drawMotif(tCtx, drawX, obj.y, 13, obj.wobble * 0.4, "#ffd166", 1, "star");
+        } else if (obj.kind === "heart") {
+          drawMotif(tCtx, drawX, obj.y, 12, 0, "#ff7597", 1, "heart");
+        } else if (obj.kind === "crown") {
+          tCtx.font = "24px serif";
+          tCtx.textAlign = "center";
+          tCtx.fillText("👑", drawX, obj.y + 8);
+        } else {
+          tCtx.fillStyle = "rgba(220, 210, 235, 0.88)";
+          tCtx.beginPath();
+          tCtx.roundRect(drawX - 22, obj.y - 10, 44, 20, 10);
+          tCtx.fill();
+        }
+
+        // Check catch with Dudu's cushion
+        if (!catchGameWon && Math.abs(drawX - catcherDudu.x) < 42 && Math.abs(obj.y - (catcherDudu.y - 26)) < 24) {
+          fallingObjects.splice(i, 1);
+          if (obj.kind === "cloud") {
+            comboStreak = 1;
+            tiaraCharge = Math.max(0, tiaraCharge - 6);
+            playSfx("cloud");
+            floatingPopups.push({ x: drawX, y: obj.y, text: "Sleepy Cloud! -6%", color: "#e0aaff", alpha: 1 });
+          } else {
+            const baseGain = obj.kind === "crown" ? 8 : obj.kind === "star" ? 5 : 4;
+            const totalGain = baseGain + Math.min(4, comboStreak - 1);
+            tiaraCharge = Math.min(100, tiaraCharge + totalGain);
+            comboStreak = Math.min(5, comboStreak + 1);
+            playSfx("collect");
+            floatingPopups.push({ x: drawX, y: obj.y, text: `+${totalGain}% ✨`, color: "#ffd166", alpha: 1 });
+          }
+          updateTiaraHud();
+
+          if (tiaraCharge >= 100 && !catchGameWon) {
+            catchGameWon = true;
+            playSfx("chime");
+            emitMagicBurst(cw / 2, ch * 0.45, 60);
+            tiaraGameWinPanel.style.display = "block";
+          }
+          continue;
+        }
+
+        if (obj.y > tCanvas.height + 24) {
+          fallingObjects.splice(i, 1);
+        }
+      }
+
+      // Draw floating score popups
+      for (let i = floatingPopups.length - 1; i >= 0; i--) {
+        const p = floatingPopups[i];
+        p.y -= 1.1;
+        p.alpha -= 0.025;
+        if (p.alpha <= 0) {
+          floatingPopups.splice(i, 1);
+        } else {
+          tCtx.save();
+          tCtx.globalAlpha = p.alpha;
+          tCtx.font = "bold 14px Quicksand, sans-serif";
+          tCtx.fillStyle = p.color;
+          tCtx.textAlign = "center";
+          tCtx.fillText(p.text, p.x, p.y);
+          tCtx.restore();
+        }
+      }
+
+      drawCatcherDudu(tCtx, catcherDudu.x, catcherDudu.y, catchGameWon);
+      catchRaf = requestAnimationFrame(runTiaraCatchLoop);
+    }
+
+    document.getElementById("btnRestartTiaraGame").addEventListener("click", () => {
+      playSfx("sparkle");
+      initTiaraCatchGame();
+    });
+    document.getElementById("btnToChapter7").addEventListener("click", () => { playSfx("chime"); switchScene(7); });
+
+    /* =========================================================================
+       7. CHAPTER 7 (NEW): ENCHANTED MIRROR OF ADMIRATION
+       ========================================================================= */
+    let mirrorStep = 0;
+    const btnRevealMirror = document.getElementById("btnRevealMirror");
+    const btnToChapter8 = document.getElementById("btnToChapter8");
+    const mirrorReflectionQuote = document.getElementById("mirrorReflectionQuote");
+    const mirrorReflectionSub = document.getElementById("mirrorReflectionSub");
+
+    btnRevealMirror.addEventListener("click", () => {
+      const ref = MIRROR_REFLECTIONS[mirrorStep % MIRROR_REFLECTIONS.length];
+      mirrorReflectionQuote.textContent = ref.quote;
+      mirrorReflectionSub.textContent = ref.sub;
+      playSfx("sparkle");
+      emitMagicBurst(cw / 2, ch * 0.42, 24);
+      mirrorStep++;
+
+      if (mirrorStep >= 1) {
+        btnToChapter8.style.display = "inline-flex";
+      }
+      if (mirrorStep < MIRROR_REFLECTIONS.length) {
+        btnRevealMirror.textContent = "See Next Reflection ✨";
+      } else {
+        btnRevealMirror.textContent = "Gaze Again ✨";
+      }
+    });
+    btnToChapter8.addEventListener("click", () => { playSfx("chime"); switchScene(8); });
+
+    /* =========================================================================
+       8. CHAPTER 8 (NEW): ROYAL TEA PARTY
+       ========================================================================= */
+    const teaPartyToast = document.getElementById("teaPartyToast");
+    document.querySelectorAll(".treat-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        playSfx("sparkle");
+        const r = btn.getBoundingClientRect();
+        emitMagicBurst(r.left + r.width / 2, r.top, 20);
+        teaPartyToast.textContent = btn.dataset.msg;
+      });
+    });
+    document.getElementById("btnToChapter9").addEventListener("click", () => { playSfx("chime"); switchScene(9); });
+
+    /* =========================================================================
+       9. CHAPTER 9: BALLROOM DANCE
+       ========================================================================= */
+    const btnAcceptDance = document.getElementById("btnAcceptDance");
+    const btnToChapter10 = document.getElementById("btnToChapter10");
+    const ballroomCard = document.getElementById("ballroomCard");
+    const ballroomPromptText = document.getElementById("ballroomPromptText");
+
+    btnAcceptDance.addEventListener("click", () => {
+      playSfx("chime");
+      if (!musicEnabled) startBackgroundMusic();
+      emitMagicBurst(cw / 2, ch * 0.42, 50);
+      ballroomCard.classList.add("ballroom-dancing");
+      ballroomPromptText.textContent = "“Even in a ballroom full of a thousand stars, my eyes would still search for You.”";
+      btnAcceptDance.style.display = "none";
+      btnToChapter10.style.display = "inline-flex";
+    });
+    btnToChapter10.addEventListener("click", () => { playSfx("sparkle"); switchScene(10); });
+
+    /* =========================================================================
+       10. CHAPTER 10: TYPEWRITER PRINCE LETTER & CHAPTER 11 FINALE
+       ========================================================================= */
+    function startPrinceLetterTypewriter() {
+      const container = document.getElementById("princeTypewriterContainer");
+      const seal = document.getElementById("princeRoyalSeal");
+      container.innerHTML = "";
+      seal.classList.remove("stamped");
+
+      let pIndex = 0;
+      let charIndex = 0;
+      let currentP = null;
+
+      function typeStep() {
+        if (currentScene !== 10) return;
+        if (pIndex >= PRINCE_LETTER_PARAGRAPHS.length) {
+          seal.classList.add("stamped");
+          playSfx("chime");
+          emitMagicBurst(cw / 2, ch * 0.55, 35);
+          return;
+        }
+
+        if (!currentP) {
+          currentP = document.createElement("p");
+          if (pIndex === PRINCE_LETTER_PARAGRAPHS.length - 1) {
+            currentP.style.fontFamily = "'Caveat', cursive";
+            currentP.style.fontSize = "1.45rem";
+            currentP.style.color = "var(--velvet-rose)";
+          }
+          container.appendChild(currentP);
+        }
+
+        const line = PRINCE_LETTER_PARAGRAPHS[pIndex];
+        if (charIndex < line.length) {
+          currentP.textContent += line[charIndex];
+          charIndex++;
+          sceneTimers.push(setTimeout(typeStep, reducedMotion ? 2 : 15));
+        } else {
+          pIndex++;
+          charIndex = 0;
+          currentP = null;
+          sceneTimers.push(setTimeout(typeStep, reducedMotion ? 10 : 130));
+        }
+      }
+      typeStep();
+    }
+
+    document.getElementById("btnToChapter11").addEventListener("click", () => { playSfx("chime"); switchScene(11); });
+
+    function startFinaleSequence() {
+      const card = document.getElementById("nightKingdomCard");
+      const proc = document.getElementById("finalProclamationCard");
+      card.className = "finale-night-box night-seq-hug";
+      proc.classList.remove("shown");
+      playSfx("chime");
+
+      sceneTimers.push(setTimeout(() => { card.className = "finale-night-box night-seq-lean"; }, 2200));
+      sceneTimers.push(setTimeout(() => {
+        card.className = "finale-night-box night-seq-stars";
+        playSfx("chime");
+        emitMagicBurst(cw / 2, ch * 0.35, 65);
+        proc.classList.add("shown");
+      }, 4400));
+    }
+
+    document.getElementById("btnReplayFairytale").addEventListener("click", () => {
+      playSfx("sparkle");
+      const env = document.getElementById("royalEnvelopeBox");
+      const inv = document.getElementById("invitationScrollCard");
+      env.style.display = "block";
+      env.classList.remove("opened");
+      inv.classList.remove("revealed");
+      inv.style.display = "none";
+
+      ch1KingdomStage.className = "stage-box ch1-kneeling";
+      btnPlaceCrown.style.display = "inline-flex";
+      btnToChapter2.style.display = "none";
+
+      litWishes.clear();
+      royalCarriageTrack.style.transform = "translate(0px, 0px)";
+      document.querySelectorAll(".wish-star-pill").forEach(b => b.classList.remove("lit"));
+      carriageWishDisplay.textContent = "Tap a star above to send a wish into the night sky...";
+
+      ballroomCard.classList.remove("ballroom-dancing");
+      ballroomPromptText.textContent = "“May I have this dance, Your Highness?”";
+      btnAcceptDance.style.display = "inline-flex";
+      btnToChapter10.style.display = "none";
+
+      switchScene(0);
+    });
+  </script>
+</body>
+</html>
